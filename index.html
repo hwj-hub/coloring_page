@@ -1,0 +1,2890 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ea580c">
+<title>색칠공부 도안 만들기 · 사진·그림을 색칠공부·숫자 색칠 도안으로, 만다라 무늬까지 A4 PDF (업로드 없이)</title>
+<meta name="description" content="사진이나 캐릭터 그림을 넣으면 선만 남긴 색칠공부 도안으로 바꿔 줍니다. 칸마다 번호를 붙인 숫자 색칠(DIY 페인팅) 도안과 색 안내·완성 그림, 어른·어르신용 만다라 무늬 도안도 만들고, 여러 장을 한 권의 A4 PDF로 저장합니다. 이름 칸·제목·선 굵기 조절까지. 사진은 서버로 보내지 않고 브라우저 안에서만 처리합니다.">
+<meta property="og:title" content="색칠공부 도안 만들기 · 사진을 색칠공부·숫자 색칠·만다라 도안으로">
+<meta property="og:description" content="사진·캐릭터 그림을 선 그림 색칠공부로, 번호 붙은 숫자 색칠 도안으로, 만다라 무늬까지. 여러 장을 A4 PDF 한 권으로. 설치·업로드 없이 무료.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hwj-hub.github.io/coloring_page/">
+<meta property="og:image" content="https://hwj-hub.github.io/coloring_page/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="색칠공부 도안 만들기 — 사진을 색칠공부·숫자 색칠·만다라 도안으로 바꾸는 무료 도구">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%96%8D%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  color-scheme:light dark;
+  --bg:#fdf7f1; --card:#fff; --card2:#fbf0e5; --fg:#2a1a10; --muted:#7c5f4b; --line:#f0dccb;
+  --accent:#ea580c; --accent2:#f97316; --afg:#fff;
+  --ok:#047857; --okbg:#e6f6f0; --warn:#b45309; --warnbg:#fef4e6; --danger:#dc2626; --dangerbg:#fdecec;
+  --shadow:0 1px 2px rgba(42,26,16,.05),0 8px 24px -14px rgba(42,26,16,.30);
+  --r:16px;
+}
+@media (prefers-color-scheme:dark){
+ :root{
+  --bg:#160e08; --card:#231710; --card2:#1c120b; --fg:#fbeee4; --muted:#d3b098; --line:#47301f;
+  --accent:#fdba74; --accent2:#fed7aa; --afg:#431407;
+  --ok:#34d399; --okbg:#0c2b23; --warn:#fbbf24; --warnbg:#2a2110; --danger:#f87171; --dangerbg:#2c1414;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -16px rgba(0,0,0,.8);
+ }
+}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);line-height:1.55;word-break:keep-all;overflow-wrap:anywhere;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Roboto,sans-serif;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:1180px;margin:0 auto;padding:0 14px calc(70px + env(safe-area-inset-bottom))}
+.hide{display:none !important}
+.nw{white-space:nowrap}
+
+/* ══ 광고 슬롯 ══ 자리만 비워 두고 화면 폭에 맞는 크기를 AD 가 채운다.
+   크기를 미리 잡아 두어 광고가 늦게 떠도 화면이 밀리지 않는다(애드핏: 광고 공간은 고정되어야 함) */
+.ad-slot{display:flex;align-items:center;justify-content:center;margin:10px auto;max-width:100%}
+.ad-top{width:320px;height:50px;max-width:100%}
+.ad-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);
+  border-radius:8px;background:var(--card2);color:var(--muted);font-size:11px;letter-spacing:.08em;font-weight:600}
+/* ── 인앱 브라우저 안내 띠 ── 앱 안 WebView 는 파일을 내려받지 못한다 */
+.iabar{display:none;align-items:center;gap:10px;margin:10px 0 0;padding:11px 12px;border-radius:12px;
+  background:var(--warnbg);border:1px solid color-mix(in srgb,var(--warn) 34%,transparent);line-height:1.5}
+body.inapp .iabar{display:flex}
+.iabar .ia-t{flex:1 1 auto;min-width:0;font-size:12.5px;font-weight:700;color:var(--fg)}
+.iabar .ia-t small{display:block;font-size:11.5px;font-weight:600;color:var(--muted);margin-top:2px}
+.iabar .ia-go{flex:0 0 auto;font:inherit;font-size:12.5px;font-weight:800;color:#fff;border:0;border-radius:999px;
+  padding:9px 14px;min-height:38px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+@media (prefers-color-scheme:dark){.iabar .ia-go{color:var(--afg)}}
+.iabar .ia-x{flex:0 0 auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  color:var(--muted);font:inherit;font-size:12px;line-height:1;cursor:pointer}
+/* ── 앱 안에서 열었을 때 막는 창 ── 토스트(z-index 99)보다는 아래에 둔다 */
+.iamodal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:18px;
+  background:rgba(24,12,6,.72);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+body.ia-lock{overflow:hidden}
+body.ia-lock .iamodal{display:flex}
+body.ia-lock .wrap{pointer-events:none}
+.iasheet{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+  width:100%;max-width:420px;max-height:92vh;overflow:auto;padding:22px 18px 16px;text-align:center}
+.iasheet .iaic{font-size:34px;line-height:1;margin-bottom:10px}
+.iasheet h2{font-size:17.5px;font-weight:800;letter-spacing:-.02em;margin:0 0 10px;line-height:1.45;text-wrap:balance}
+.iap{font-size:13.5px;font-weight:600;color:var(--muted);line-height:1.7;margin:0 0 14px}
+.iap b{color:var(--fg);font-weight:800}
+.iasteps{text-align:left;margin:0 0 16px;padding:12px 14px 12px 32px;border-radius:12px;background:var(--card2);
+  font-size:13px;font-weight:600;color:var(--muted);line-height:1.7}
+.iasteps li+li{margin-top:5px}
+.iasteps b{color:var(--fg);font-weight:800}
+.iabtn{display:block;width:100%;font:inherit;font-size:15px;font-weight:800;color:#fff;border:0;border-radius:12px;
+  padding:14px;min-height:52px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:var(--shadow)}
+@media (prefers-color-scheme:dark){.iabtn{color:var(--afg)}}
+.iafine{margin:12px 0 0;font-size:12px;font-weight:600;color:var(--muted);line-height:1.6}
+.iafine button{font:inherit;font-size:12px;font-weight:700;color:var(--muted);background:none;border:0;padding:6px 8px;
+  text-decoration:underline;cursor:pointer;min-height:36px}
+.dwarn{margin:10px 0 0;padding:10px 12px;border-radius:10px;background:var(--warnbg);font-size:12.5px;font-weight:700;line-height:1.6}
+.dwarn button{font:inherit;font-size:12.5px;font-weight:800;color:var(--accent);background:none;border:0;padding:9px 2px;margin:-9px 0;
+  text-decoration:underline;cursor:pointer}
+.ad-lab{display:block;text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.14em;color:var(--muted);opacity:.7;margin:12px 0 -4px}
+body.no-ad .ad-slot,.ad-none{display:none !important}
+/* PC 옆 칸 — 미리보기 카드 바로 위 320×50 (좁은 화면에서는 숨긴다) */
+@media (max-width:979px){#ad-side{display:none}}
+@media (min-width:980px){#ad-side{margin:14px auto 0}}
+/* 본문 광고는 버튼·입력칸에서 넉넉히 떼어 놓는다 — 실수로 눌리는 자리는 금지 */
+#ad-mid{margin:18px auto}
+
+/* ── 하단 오버형 ── 콘텐츠를 가리지 않도록 본문 아래 여백을 같이 늘린다(애드핏: 콘텐츠를 덮는 배치 금지).
+   고르는 중·미리보기를 보는 중에는 띄우지 않는다 — 핵심 행동 중 광고 노출 금지 조항 */
+#anchor{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;align-items:center;justify-content:center;
+  background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 22px -14px rgba(0,0,0,.55);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));transform:translateY(120%);
+  /* 바 위쪽에 붙은 「광고」 라벨·닫기는 translateY 로 내려도 화면에 걸쳐 남는다 — 통째로 감춘다 */
+  visibility:hidden;pointer-events:none;transition:transform .22s,visibility 0s linear .22s}
+#anchor.on{transform:none;visibility:visible;pointer-events:auto;transition:transform .22s,visibility 0s}
+#anchor .ad-slot{margin:0}
+#anchor .amk{position:absolute;left:10px;top:-11px;font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--muted);
+  background:var(--card);border:1px solid var(--line);border-radius:5px;padding:0 5px;line-height:15px}
+/* 닫기는 광고 영역 밖에 둔다 — 광고 안에 닫기 버튼을 넣는 것은 금지(오클릭 방지) */
+#anchor .axl{position:absolute;right:6px;top:-38px;width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:13px;line-height:1;box-shadow:var(--shadow)}
+#anchor .axl::before{content:'';position:absolute;inset:-6px}
+body.anch .wrap{padding-bottom:calc(124px + env(safe-area-inset-bottom))}
+body.anch #toast{bottom:calc(118px + env(safe-area-inset-bottom))}
+@media (min-width:980px){#anchor{display:none}}
+
+/* ── 저장 완료 카드 ── 화면을 덮지 않고 본문 흐름 안에 펼친다 */
+#doneCard{border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+#doneCard .ad-lab{margin-top:16px}
+.dmsg{margin:0 0 10px;font-size:14px;font-weight:700;line-height:1.6}
+.dsteps{margin:0;padding:0 0 0 20px;font-size:13px;font-weight:600;line-height:1.75;color:var(--muted)}
+.dsteps b{color:var(--fg);font-weight:800}
+
+header{text-align:center;padding:14px 0 2px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.logo .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:17px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
+.tag{font-size:14.5px;font-weight:600;color:var(--muted);margin:8px 0 0;text-wrap:balance}
+.tag b{color:var(--fg)}
+.badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
+.badge{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--okbg);color:var(--ok);border:1px solid transparent}
+.badge.gray{background:var(--card2);color:var(--muted);border-color:var(--line)}
+
+/* ── 두 칸 배치 · 넓은 화면에서 미리보기를 옆에 붙인다 ── */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:0 16px}
+@media (min-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr) 470px;align-items:start}
+  /* 옆 칸이 화면보다 길면 스스로 스크롤한다 — sticky 만 두면 완료 카드가 화면 밖에 남는다 */
+  .side{position:sticky;top:8px;max-height:calc(100vh - 16px);overflow:auto;overscroll-behavior:contain;
+    scrollbar-width:thin;padding:0 2px 12px}
+}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-top:14px}
+.card h2{font-size:12px;font-weight:800;color:var(--muted);margin:0 0 12px;letter-spacing:.07em;
+  display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card h2 .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;margin-right:6px;
+  background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);letter-spacing:0;font-size:11.5px}
+.pvinfo{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:0;text-align:right;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.row{margin-top:16px}
+.row:first-child{margin-top:0}
+.lab{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:800;margin-bottom:8px}
+.lab .hint{font-weight:500;color:var(--muted);font-size:12px;text-align:right}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(62px,1fr));gap:6px}
+.seg button{min-width:0;border:1px solid var(--line);background:var(--card2);color:var(--fg);font:inherit;font-size:13px;
+  font-weight:700;padding:8px 6px;border-radius:11px;cursor:pointer;min-height:44px;transition:.15s;line-height:1.3}
+.seg button i{display:block;font-style:normal;font-size:10.5px;font-weight:600;color:var(--muted);margin-top:2px}
+.seg button:hover{border-color:var(--accent)}
+.seg button.on{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:var(--shadow)}
+.seg button.on i{color:rgba(255,255,255,.85)}
+@media (prefers-color-scheme:dark){.seg button.on{color:var(--afg)}.seg button.on i{color:rgba(67,20,7,.75)}}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-size:12.5px;font-weight:700;
+  padding:7px 11px;border-radius:999px;cursor:pointer;min-height:40px;line-height:1.25}
+.chip:hover{border-color:var(--accent)}
+.chip.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card));color:var(--accent)}
+.chip:disabled{opacity:.4;cursor:default}
+.sub-h{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.06em;margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+
+/* ── 1. 사진 ── */
+.drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;
+  border:2px dashed color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:14px;background:var(--card2);
+  padding:22px 14px;min-height:150px;cursor:pointer;transition:.15s}
+.drop:hover,.drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--card2))}
+.drop .big{font-size:30px;line-height:1}
+.drop b{font-size:15px;font-weight:800}
+.drop span{font-size:12.5px;font-weight:600;color:var(--muted)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.samples{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.samples .k{font-size:12px;font-weight:800;color:var(--muted);margin-right:2px}
+.samples .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px 5px 5px}
+.samples .chip canvas{width:28px;height:28px;border-radius:7px;display:block}
+.cropwrap{position:relative;display:flex;justify-content:center;align-items:center;border-radius:12px;overflow:hidden;
+  background:repeating-conic-gradient(color-mix(in srgb,var(--line) 70%,transparent) 0 25%,transparent 0 50%) 0 0/16px 16px;
+  touch-action:none;user-select:none;-webkit-user-select:none}
+#cropCv{display:block;max-width:100%;cursor:move;touch-action:none}
+.srcbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.srcname{flex:1 1 100%;font-size:12px;font-weight:700;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#srcBox details.adjd{margin-top:14px;border-top:1px solid var(--line);padding:12px 0 0}
+details.adjd summary{font-size:13px;font-weight:800;color:var(--muted)}
+details.adjd summary span{font-weight:600;font-size:12px}
+.adj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 12px}
+@media (max-width:430px){.adj{grid-template-columns:minmax(0,1fr)}}
+.adj label{display:block;font-size:12px;font-weight:800;color:var(--muted)}
+.adj label output{float:right;color:var(--accent)}
+.adj input{width:100%;accent-color:var(--accent);height:30px}
+
+/* ── 2. 종류 ── */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:7px}
+.tbtn{display:flex;flex-direction:column;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card2);color:var(--fg);
+  font:inherit;padding:10px 4px 9px;border-radius:13px;cursor:pointer;min-height:92px;transition:.15s;line-height:1.25;text-align:center}
+.tbtn:hover{border-color:var(--accent)}
+.tbtn svg{width:34px;height:34px;flex:0 0 auto}
+.tbtn b{font-size:13px;font-weight:800;letter-spacing:-.01em}
+.tbtn i{font-style:normal;font-size:10.5px;font-weight:600;color:var(--muted)}
+.tbtn.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card));box-shadow:0 0 0 1px var(--accent) inset}
+.tbtn.on b{color:var(--accent)}
+
+/* ── 3. 크기 · 색 ── */
+.nf{position:relative;min-width:0;display:block}
+.nf span{position:absolute;left:10px;top:5px;font-size:10.5px;font-weight:800;color:var(--muted);pointer-events:none;letter-spacing:.02em}
+.nf input,.nf select{display:block;width:100%;font:inherit;font-size:16px;font-weight:700;color:var(--fg);background:var(--card2);
+  border:1px solid var(--line);border-radius:10px;padding:19px 10px 5px;min-height:50px}
+.nf input:focus,.nf select:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.chk{display:flex;gap:9px;align-items:flex-start;padding:8px 0;cursor:pointer;font-size:13.5px;font-weight:700}
+.chk input{flex:0 0 auto;width:20px;height:20px;margin:1px 0 0;accent-color:var(--accent)}
+.chk i{display:block;font-style:normal;font-size:12px;font-weight:600;color:var(--muted);margin-top:2px;line-height:1.6}
+.rng{display:flex;align-items:center;gap:10px}
+.rng input[type=range]{flex:1 1 auto;accent-color:var(--accent);height:32px;min-width:0}
+.rng output{flex:0 0 auto;min-width:64px;text-align:right;font-size:13.5px;font-weight:800;color:var(--accent)}
+.rng .nf{flex:0 0 92px}
+.calc{margin-top:8px;font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.6}
+.calc b{color:var(--accent)}
+
+.note{border-radius:11px;padding:10px 12px;font-size:12.5px;font-weight:600;line-height:1.65;margin-top:11px}
+.note b{font-weight:800}
+.note.info{background:var(--card2);color:var(--muted);border:1px solid var(--line)}
+.note.warn{background:var(--warnbg);color:var(--warn)}
+.fine{font-size:12px;font-weight:600;color:var(--muted);line-height:1.65;margin:9px 0 0}
+.fine b{color:var(--fg)}
+
+/* ── 미리보기 · 저장 ── */
+.btn{flex:1 1 90px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font:inherit;font-size:14px;font-weight:800;
+  padding:10px 10px;border-radius:12px;cursor:pointer;min-height:54px;transition:.15s;display:inline-flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1px;text-align:center;line-height:1.25}
+.btn i{font-style:normal;font-size:10.5px;font-weight:700;color:var(--muted)}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.pri{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+.btn.pri i{color:rgba(255,255,255,.88)}
+.btn.pri:hover:not(:disabled){filter:brightness(1.06)}
+@media (prefers-color-scheme:dark){.btn.pri{color:var(--afg)}.btn.pri i{color:rgba(67,20,7,.75)}}
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.pvstate{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0;white-space:nowrap}
+.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px}
+.tools .grp{display:flex;gap:4px;padding:3px;border-radius:12px;background:var(--card2);border:1px solid var(--line)}
+.tb{border:0;background:transparent;color:var(--muted);font:inherit;font-size:12.5px;font-weight:800;min-width:42px;min-height:38px;
+  padding:4px 9px;border-radius:9px;cursor:pointer;line-height:1.1;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.tb:hover:not(:disabled){color:var(--fg)}
+.tb.on{background:var(--card);color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.tb:disabled{opacity:.35;cursor:default}
+.tb .dotc{width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.25);flex:0 0 auto}
+.pvbox{position:relative;margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:8px;display:flex;justify-content:center;align-items:flex-start;
+  background:color-mix(in srgb,var(--line) 45%,var(--card2));overflow:auto;max-height:70vh;min-height:120px}
+.pvbox.zoom{justify-content:flex-start}
+.pvbox canvas{display:block;flex:0 0 auto;background:#fff;box-shadow:0 2px 10px -4px rgba(0,0,0,.35)}
+.pvbox.paint canvas{touch-action:none;cursor:crosshair}
+@media (min-width:980px){.pvbox{max-height:calc(100vh - 330px)}}
+.pvempty{align-self:center;margin:auto;padding:26px 10px;text-align:center;font-size:13px;font-weight:700;color:var(--muted);line-height:1.7}
+.pvmeta{margin-top:8px;font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.65}
+.pvmeta b{color:var(--fg)}
+.pdfopt{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px;margin-top:10px}
+.warnline{margin-top:8px;font-size:12px;font-weight:700;color:var(--warn);line-height:1.6}
+
+/* ── 색 목록 ── */
+.legsum{font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.7;margin:0 0 10px}
+.legsum b{color:var(--fg)}
+.leg{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;max-height:420px;overflow:auto;padding:2px}
+@media (min-width:560px){.leg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.li{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font:inherit;text-align:left;
+  padding:5px 8px 5px 5px;border-radius:11px;cursor:pointer;min-height:44px;min-width:0}
+.li:hover{border-color:var(--accent)}
+.li.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:color-mix(in srgb,var(--accent) 8%,var(--card))}
+.li svg{width:32px;height:32px;flex:0 0 auto;border-radius:6px;border:1px solid rgba(0,0,0,.18)}
+.li .tx{flex:1 1 auto;min-width:0;line-height:1.3}
+.li .tx b{display:block;font-size:12.5px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li .tx i{display:block;font-style:normal;font-size:10.5px;font-weight:700;color:var(--muted);font-family:ui-monospace,Consolas,monospace}
+.li .ct{flex:0 0 auto;font-size:12px;font-weight:800;color:var(--muted);text-align:right;line-height:1.3}
+.li .ct small{display:block;font-size:10px;font-weight:700;opacity:.8}
+.legact{margin-top:10px;padding:10px;border-radius:12px;background:var(--card2);border:1px solid var(--line)}
+.legact .ttl{font-size:12.5px;font-weight:800;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.legact .ttl .dotc{width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,.25)}
+.legact .acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cpick{position:relative;display:inline-flex;align-items:center;gap:6px;overflow:hidden}
+.cpick input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.legact select{font:inherit;font-size:13px;font-weight:700;color:var(--fg);background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:8px 10px;min-height:40px;max-width:100%}
+
+.use{list-style:none;margin:0;padding:0}
+.use li{position:relative;padding-left:26px;margin-bottom:13px;font-size:13.5px;font-weight:600;line-height:1.65}
+.use li:last-child{margin-bottom:0}
+.use li::before{content:"▸";position:absolute;left:4px;top:0;color:var(--accent);font-weight:800}
+.use li b{font-weight:800}
+.use li .d{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-top:3px;line-height:1.7}
+@media (min-width:980px){.use{columns:2;column-gap:28px}.use li{break-inside:avoid}}
+
+details{border-top:1px solid var(--line);padding:12px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none;padding:10px 0;margin:-10px 0}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"＋ ";color:var(--accent);font-weight:800}
+details[open] summary::before{content:"－ "}
+details p{margin:8px 0 0;font-size:13.5px;color:var(--muted);line-height:1.8}
+details p b{color:var(--fg)}
+
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;line-height:1.8}
+footer b{color:var(--fg)}
+
+/* ── 모바일 하단 바 ── 설정을 만지는 동안 미리보기가 화면 밖이면 띄운다 */
+#mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(115%);transition:transform .22s;
+  background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 22px -14px rgba(0,0,0,.55);
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom))}
+#mbar.on{transform:none}
+#mbar .in{max-width:700px;margin:0 auto;display:flex;align-items:center;gap:10px}
+#mbar .k{flex:1 1 auto;min-width:0;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.03em}
+#mbar .k b{display:block;font-size:13.5px;font-weight:800;color:var(--fg);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#mbar .go{flex:0 0 auto;font:inherit;font-size:13px;font-weight:800;color:#fff;padding:10px 15px;border-radius:999px;border:0;cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));min-height:42px}
+@media (prefers-color-scheme:dark){#mbar .go{color:var(--afg)}}
+@media (min-width:980px){#mbar{display:none}}
+/* 휴대폰 — 사진·종류를 고르면 바로 아래에서 도안을 보여 주고, 크기·색 설정과 색 목록은 그 아래로 */
+@media (max-width:979px){
+  .layout{display:flex;flex-direction:column}
+  #form,.side{display:contents}
+  #typeCard{order:1} #photoCard{order:2} #mandCard{order:2} #pvCard{order:3} #doneCard{order:4} #tuneCard{order:5} #paperCard{order:6} #legCard{order:7}
+}
+
+#toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#2a1a10;color:#fff;font-size:13.5px;font-weight:700;line-height:1.5;
+  padding:10px 16px;border-radius:14px;width:max-content;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:92vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast button{font:inherit;font-weight:800;color:#fdba74;background:none;border:0;padding:4px 2px 4px 8px;cursor:pointer;pointer-events:auto;text-decoration:underline}
+#toast.act{pointer-events:auto}
+@media (prefers-color-scheme:dark){#toast{background:#fbeee4;color:#431407}#toast button{color:#ea580c}}
+
+@media (max-width:430px){
+  .card{padding:14px}
+  .lab{flex-direction:column;align-items:stretch;gap:2px}
+  .lab .hint{text-align:left}
+  .seg button{font-size:12.5px}
+  .tag{font-size:14px}
+  .tb{padding:4px 7px;min-width:40px}
+}
+
+/* ══ 주의 문구 ══ */
+.nbx{border:1px solid var(--warn);border-radius:14px;background:var(--warnbg);padding:14px 15px;margin-top:14px}
+.nbx-h{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;color:var(--warn);margin:0 0 10px}
+.nbx-h .ic{flex:0 0 auto;width:19px;height:19px;border-radius:6px;background:var(--warn);color:var(--warnbg);
+  font-size:12px;font-weight:800;display:grid;place-items:center;line-height:1}
+.nbx ul{list-style:none;margin:0;padding:0}
+.nbx li{position:relative;padding-left:12px;margin-bottom:7px;font-size:12px;font-weight:600;line-height:1.68;color:var(--warn)}
+.nbx li:last-child{margin-bottom:0}
+.nbx li::before{content:"·";position:absolute;left:1px;top:-1px;font-weight:800}
+.nbx li b{font-weight:800}
+.nbx .nbx-f{margin:11px 0 0;padding-top:10px;border-top:1px solid color-mix(in srgb,var(--warn) 32%,transparent);
+  font-size:12px;font-weight:700;line-height:1.72;color:var(--warn)}
+.nbx .nbx-f b{font-weight:800}
+
+/* ══ 색칠공부 도안 전용 ══ */
+.tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tbtn{min-height:104px}
+.tbtn svg{width:44px;height:44px}
+/* 넣은 사진·무늬 줄 */
+.strip{display:flex;gap:7px;overflow-x:auto;padding:4px 2px 6px;margin-top:12px;scrollbar-width:thin}
+.strip:empty{display:none}
+.th{position:relative;flex:0 0 auto;width:66px;height:66px;border-radius:11px;border:2px solid var(--line);background:var(--card2);
+  padding:0;cursor:pointer;overflow:hidden}
+.th canvas{display:block;width:100%;height:100%;object-fit:contain}
+.th.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+.th .no{position:absolute;left:3px;top:3px;min-width:18px;height:18px;border-radius:6px;background:rgba(0,0,0,.62);color:#fff;
+  font-size:10.5px;font-weight:800;display:grid;place-items:center;padding:0 4px;line-height:1}
+.th.add{display:grid;place-items:center;font-size:24px;font-weight:700;color:var(--accent);border-style:dashed}
+.stripk{font-size:12px;font-weight:800;color:var(--muted);margin-top:12px;display:flex;justify-content:space-between;gap:8px}
+.stripk span{font-weight:600}
+/* 미리보기 쪽 넘기기 */
+.pnav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.pnav .tb{min-width:40px}
+.pnav output{min-width:54px;text-align:center;font-size:12.5px;font-weight:800;color:var(--fg)}
+.pvbox canvas{max-width:100%;height:auto}
+.pvbox.busy::after{content:"그리는 중…";position:absolute;right:12px;top:12px;font-size:11px;font-weight:800;color:var(--accent);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+.scale{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--muted);margin-top:-2px}
+/* 색 안내 */
+.leg .li{cursor:default}
+.leg .sw{width:32px;height:32px;flex:0 0 auto;border-radius:50%;border:1px solid rgba(0,0,0,.2);display:grid;place-items:center;
+  font-size:12.5px;font-weight:800}
+.tinput{display:block;width:100%;font:inherit;font-size:16px;font-weight:700;color:var(--fg);background:var(--card2);
+  border:1px solid var(--line);border-radius:10px;padding:12px 11px;min-height:48px;margin-top:8px}
+.tinput:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║  광고 자리 ① 맨 위 · 320×50 (모바일·PC 같은 크기)                     ║
+     ║  단위 ID 는 스크립트 아래쪽 AD.units 한 곳에서 바꿉니다.               ║
+     ║  ins·script 를 여기 직접 쓰지 않고 AD 가 넣는 이유                     ║
+     ║   · 보이는 자리만 부르려고(안 보이는 광고는 부르지 않음)               ║
+     ║   · 한 페이지 4개 제한을 코드 한 곳에서 지키려고                       ║
+     ║  크기는 휴대폰에 들어가는 것만 씁니다 — 320×50 · 320×100 · 300×250     ║
+     ║  한 화면에 4곳 — 모바일 ① 맨 위 ③ 본문 ④ 완료 카드 ⑤ 하단 오버형      ║
+     ║              PC   ① 맨 위 ② 미리보기 위 ③ 본문 ④ 완료 카드            ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<div class="ad-slot ad-top" id="ad-top"></div>
+
+<!-- 네이버·카카오 앱 안에서 열렸을 때만 보이는 띠 (body.inapp) -->
+<div class="iabar" id="iabar">
+  <div class="ia-t"><span id="iaMsg">앱 안에서 열려서 도안 PDF 저장이 안 될 수 있어요.</span>
+    <small id="iaSub">크롬·사파리에서 열면 바로 저장됩니다.</small></div>
+  <button class="ia-go" id="iaGo" type="button">크롬에서 열기</button>
+  <button class="ia-x" id="iaX" type="button" aria-label="안내 닫기">✕</button>
+</div>
+
+<header>
+  <div class="logo"><span class="ico">🖍️</span><span>색칠공부 도안 만들기</span></div>
+  <p class="tag">사진·캐릭터 그림을 <b>선 그림 색칠공부</b>로, 칸마다 번호가 붙은 <b>숫자 색칠</b>로, <b>만다라 무늬</b>까지 A4&nbsp;PDF로&nbsp;뽑아&nbsp;줍니다</p>
+  <div class="badges">
+    <span class="badge">🔒 사진을 서버로 보내지 않음</span>
+    <span class="badge gray">도안 3가지</span>
+    <span class="badge gray">여러 장 한 권으로</span>
+    <span class="badge gray">A4 PDF · PNG</span>
+  </div>
+</header>
+
+<div class="layout">
+<main id="form">
+
+<!-- 1. 종류 -->
+<section class="card" id="typeCard">
+  <h2><span><span class="n">1</span>만들 도안</span><span class="pvinfo" id="typeHint"></span></h2>
+  <div class="tgrid" id="tgrid"></div>
+  <p class="fine" id="typeDesc"></p>
+</section>
+
+<!-- 2. 사진 (선 그림 · 숫자 색칠) -->
+<section class="card" id="photoCard">
+  <h2><span><span class="n">2</span>사진·그림 넣기</span><span class="pvinfo" id="photoHint"></span></h2>
+  <label class="drop" id="drop">
+    <span class="big">🖼️</span>
+    <b>사진·그림 고르기</b>
+    <span>눌러서 고르거나 끌어다 놓기 · 붙여넣기(Ctrl+V)</span>
+    <span>여러 장을 고르면 한 장씩 쪽이 되어 <b>색칠공부 책</b>이 됩니다</span>
+    <input type="file" id="fileIn" accept="image/*" multiple aria-label="사진 고르기">
+  </label>
+  <div class="samples" id="samples"><span class="k">예시로 해 보기</span></div>
+  <div class="stripk" id="stripK"></div>
+  <div class="strip" id="strip"></div>
+  <div id="srcBox" class="hide">
+    <div class="sub-h" style="margin-top:12px">쓸 부분 고르기 <span style="font-weight:600;letter-spacing:0">— 네모를 끌어 옮기고, 모서리로 크기를 바꿉니다</span></div>
+    <div class="cropwrap" style="margin-top:10px"><canvas id="cropCv" width="10" height="10" aria-label="자를 부분 고르기"></canvas></div>
+    <div class="srcbar">
+      <span class="srcname" id="srcName"></span>
+      <button class="chip" type="button" id="cropAll">전체</button>
+      <button class="chip" type="button" id="cropSq">가운데 정사각형</button>
+      <button class="chip" type="button" id="rotBtn">⟳ 90° 돌리기</button>
+      <button class="chip" type="button" id="delBtn">이 사진 빼기</button>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 무늬 (만다라) -->
+<section class="card hide" id="mandCard">
+  <h2><span><span class="n">2</span>무늬 고르기</span><span class="pvinfo" id="mandHint"></span></h2>
+  <div class="row">
+    <div class="lab"><span>대칭 수</span><span class="hint">한 바퀴에 같은 무늬가 몇 번 도는지</span></div>
+    <div class="seg" id="segSym"></div>
+  </div>
+  <div class="row">
+    <div class="lab"><span>복잡한 정도</span><span class="hint">안에서 밖으로 쌓는 띠 수 · 어린이는 3~5, 어른은 7~9</span></div>
+    <div class="rng"><input type="range" id="rngRings" min="3" max="9" step="1" aria-label="띠 수"><output id="outRings">6겹</output></div>
+  </div>
+  <div class="row">
+    <div class="lab"><span>무늬 느낌</span></div>
+    <div class="seg" id="segStyle"></div>
+  </div>
+  <div class="actions" style="margin-top:14px">
+    <button class="btn" id="mNew" type="button">🎲 다른 무늬로<i>이 쪽만 새로 뽑기</i></button>
+    <button class="btn" id="mAdd" type="button">＋ 한 장 더<i>무늬 책 만들기 (최대 40장)</i></button>
+  </div>
+  <div class="stripk" id="mStripK"></div>
+  <div class="strip" id="mStrip"></div>
+</section>
+
+<!-- 3. 선 다듬기 -->
+<section class="card" id="tuneCard">
+  <h2><span><span class="n">3</span>선 다듬기</span><span class="pvinfo" id="tuneHint"></span></h2>
+  <div class="row">
+    <div class="lab"><span>세밀함</span><span class="hint" id="detailHint">낮추면 큰 덩어리만, 높이면 작은 부분까지 선으로 나눕니다</span></div>
+    <div class="rng"><input type="range" id="rngDetail" min="1" max="10" step="1" aria-label="세밀함"><output id="outDetail">5</output></div>
+    <div class="scale"><span>단순하게 · 어린아이</span><span>자세하게 · 어른</span></div>
+  </div>
+  <div class="row" id="rowColors">
+    <div class="lab"><span>색 수</span><span class="hint">숫자 색칠에 쓰는 물감·색연필 개수</span></div>
+    <div class="rng"><input type="range" id="rngColors" min="4" max="30" step="1" aria-label="색 수"><output id="outColors">12색</output></div>
+  </div>
+  <div class="row">
+    <label class="chk" id="rowInk"><input type="checkbox" id="optInk"><span>검은 윤곽선 살리기<i>만화·캐릭터 그림처럼 테두리가 까만 그림이면 켜 두세요. 윤곽선을 한 줄로 따라 그리고, 입·수염 같은 열린 선도 남깁니다</i></span></label>
+  </div>
+</section>
+
+<!-- 4. 종이 꾸미기 -->
+<section class="card" id="paperCard">
+  <h2><span><span class="n">4</span>종이 꾸미기</span><span class="pvinfo" id="paperHint"></span></h2>
+  <div class="row">
+    <div class="lab"><span>선 굵기</span><span class="hint">어린아이는 굵게 — 선 밖으로 덜 삐져나와 보입니다</span></div>
+    <div class="seg" id="segLw"></div>
+  </div>
+  <div class="row">
+    <div class="lab"><span>종이 방향</span><span class="hint">A4 · 자동은 그림 모양에 맞춥니다</span></div>
+    <div class="seg" id="segPaper"></div>
+  </div>
+  <div class="row">
+    <div class="lab"><span>맨 위 칸</span></div>
+    <div class="seg" id="segHead"></div>
+    <input type="text" class="tinput hide" id="titleIn" maxlength="40" placeholder="예: 우리 강아지 콩이 · 봄 소풍 색칠하기" aria-label="제목">
+  </div>
+  <div class="row" id="rowLegend">
+    <div class="lab"><span>색 안내</span><span class="hint">번호마다 어떤 색을 칠하는지</span></div>
+    <div class="seg" id="segLegend"></div>
+  </div>
+  <div class="row">
+    <label class="chk"><input type="checkbox" id="optFrame"><span>그림 둘레에 테두리 선<i>사진 가장자리에 걸친 부분도 닫힌 칸이 되어 칠하기 편합니다</i></span></label>
+  </div>
+</section>
+
+</main>
+
+<aside class="side" id="side">
+  <!-- 광고 자리 ② PC 미리보기 카드 바로 위 320×50 · 좁은 화면에서는 숨깁니다 -->
+  <div class="ad-slot" id="ad-side"></div>
+  <section class="card pv" id="pvCard">
+    <h2><span>미리보기 · 저장</span><span class="pvstate" id="pvState"></span></h2>
+    <div class="actions">
+      <button class="btn pri" id="dlPdf" type="button" disabled>PDF로 저장<i id="pdfSub">A4 · 인쇄용</i></button>
+      <button class="btn" id="dlPng" type="button" disabled>이 쪽 그림으로<i>PNG · 300dpi</i></button>
+    </div>
+    <div class="tools">
+      <div class="grp" role="group" aria-label="보기" id="viewGrp">
+        <button class="tb" type="button" data-v="page">도안</button>
+        <button class="tb" type="button" data-v="color">색칠 예시</button>
+        <button class="tb" type="button" data-v="orig">원본</button>
+      </div>
+      <div class="pnav" id="pnav">
+        <button class="tb" type="button" id="pPrev" aria-label="앞 쪽">◀</button>
+        <output id="pNo">1 / 1</output>
+        <button class="tb" type="button" id="pNext" aria-label="다음 쪽">▶</button>
+      </div>
+    </div>
+    <div class="pvbox" id="pvBox"><div class="pvempty" id="pvEmpty">위에서 <b>사진</b>을 넣거나<br><b>예시</b>를 누르면 도안이 여기 나타납니다</div><canvas id="pv" width="10" height="10" class="hide" aria-label="도안 미리보기"></canvas></div>
+    <div class="pvmeta" id="pvMeta"></div>
+  </section>
+
+  <!-- 광고 자리 ④ 저장 완료 카드 300×250 — 누른 다음에 펼쳐지고, 화면을 덮지 않습니다.
+       닫기는 카드 머리(광고에서 멀리 떨어진 곳)에 둡니다 — 광고 안 닫기 버튼은 금지 -->
+  <section class="card hide" id="doneCard">
+    <h2><span id="doneTitle">도안 PDF를 저장했습니다</span><button class="chip" id="doneHide" type="button">닫기</button></h2>
+    <p class="dmsg" id="doneMsg"></p>
+    <ol class="dsteps" id="doneSteps">
+      <li><b>인쇄할 때</b> — 「용지에 맞춤」 대신 <b>실제 크기(100%)</b>로 찍으면 여백이 고르게 나옵니다. 흑백 프린터로 찍어도 됩니다.</li>
+      <li><b>색연필·사인펜</b>은 보통 종이(80g)로 충분하고, <b>물감·마카</b>로 칠할 거면 도화지나 두꺼운 종이에 찍어야 뒤로 번지지 않습니다.</li>
+      <li>숫자 색칠은 <b>연한 색부터</b> 칠하고, 번호가 비치면 한 번 더 덧칠하세요.</li>
+    </ol>
+    <p class="dwarn hide" id="doneInapp">파일이 안 보이나요? 앱 안 브라우저는 내려받기가 막혀 있습니다.
+      <button type="button" id="doneGo">다른 브라우저로 열기</button></p>
+    <div id="doneAd"><span class="ad-lab">광고</span><div class="ad-slot" id="ad-done"></div></div>
+  </section>
+
+  <section class="card hide" id="legCard">
+    <h2><span>색 안내</span><span class="pvinfo" id="legHint"></span></h2>
+    <p class="legsum" id="legSum"></p>
+    <div class="leg" id="leg"></div>
+  </section>
+</aside>
+</div>
+
+<!-- 광고 자리 ③ 본문 중간 320×100 — 도안 카드가 다 끝난 자리에 둡니다(입력 중 광고 금지 조항).
+     버튼·입력칸에서 18px 이상 떼어 놓습니다. 모바일·PC 가 같은 자리라 단위 ID 하나면 됩니다 -->
+<div class="ad-slot" id="ad-mid"></div>
+
+<section class="card">
+  <h2><span>이럴 때 씁니다</span></h2>
+  <ul class="use">
+    <li><b>우리 아이 사진·반려동물 사진으로 색칠공부</b>
+      <span class="d">사진을 넣으면 색이 바뀌는 곳마다 선을 그어 칠할 칸을 만듭니다. <b>세밀함</b>을 낮추면 큰 칸 몇 개만 남아 유치원생도 칠하기 쉽고, 높이면 초등학생·어른용으로 자세해집니다.</span></li>
+    <li><b>아이가 좋아하는 그림을 도안으로</b>
+      <span class="d">검은 윤곽선이 있는 만화·캐릭터 그림은 <b>검은 윤곽선 살리기</b>를 켜면 테두리를 한 줄로 따라 그립니다. 집에서 아이와 칠할 한 장만 뽑을 때 쓰세요(아래 주의 참고).</span></li>
+    <li><b>숫자 색칠(DIY 페인팅) 도안 직접 만들기</b>
+      <span class="d">색 수를 정하면 칸마다 번호를 적고, 번호별 색 안내와 <b>완성 그림</b>을 같이 뽑아 줍니다. 가족 사진이나 여행 풍경으로 나만의 그림 그리기 세트를 만들 수 있습니다.</span></li>
+    <li><b>어른·어르신 색칠 활동지 — 만다라</b>
+      <span class="d">대칭 수와 복잡한 정도를 골라 누를 때마다 새 만다라 무늬를 뽑습니다. 여러 장을 한 PDF로 묶어 복지관·요양원 활동, 학교 창체 시간 자료로 씁니다.</span></li>
+    <li><b>어린이집·유치원 활동지</b>
+      <span class="d">맨 위에 <b>이름·날짜 칸</b>이나 제목을 넣고, 사진 여러 장을 한꺼번에 넣어 쪽마다 한 장씩 든 색칠공부 책을 만듭니다.</span></li>
+    <li><b>수업 자료·교재 삽화</b>
+      <span class="d">풍경·과일·건물 사진을 선 그림으로 바꿔 PNG(300dpi)로 받아 한글·파워포인트 문서에 넣습니다.</span></li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2><span>자주 묻는 것</span></h2>
+
+  <details>
+    <summary>어떤 사진이 도안으로 잘 나오나요?</summary>
+    <p><b>주인공이 크게 나오고 배경이 단순한 사진</b>이 가장 깔끔합니다. 역광·어두운 사진, 잎이 무성한 나무·군중처럼 잔무늬가 많은 사진은 선이 어지러워지기 쉽습니다.
+      그럴 때는 ① <b>쓸 부분 고르기</b>로 주인공만 남기고 ② <b>세밀함</b>을 한두 칸 낮추세요. 윤곽선이 있는 만화 그림은 사진보다 훨씬 깨끗하게 나옵니다.</p>
+  </details>
+
+  <details>
+    <summary>선이 너무 많아요 / 너무 적어요</summary>
+    <p><b>세밀함</b> 하나로 조절합니다. 낮추면 비슷한 색을 더 크게 묶고 작은 조각을 이웃 칸에 합쳐 선이 줄고, 높이면 작은 부분까지 나눕니다.
+      하늘·벽처럼 색이 서서히 바뀌는 곳은 띠로 갈라지지 않게 자동으로 합칩니다.</p>
+  </details>
+
+  <details>
+    <summary>숫자 색칠 색 번호는 어떻게 정하나요?</summary>
+    <p>그림에서 <b>넓게 쓰인 색이 1번</b>입니다. 색 안내에는 번호·비슷한 색 이름·색 코드(#RRGGBB)를 적어 두니, 가진 물감·색연필 가운데 가장 가까운 것을 고르세요.
+      특정 회사 제품의 색 번호는 넣지 않았습니다. 칸이 너무 작으면 번호가 안 들어가서 이웃 칸과 합칩니다 — 그래서 작은 점 같은 칸은 생기지 않습니다.</p>
+  </details>
+
+  <details>
+    <summary>만다라는 매번 다르게 나오나요?</summary>
+    <p>네. <b>다른 무늬로</b>를 누를 때마다 꽃잎·잎·아치·물방울·마름모·점 무늬를 새로 섞어 그립니다. 같은 무늬를 다시 쓰고 싶으면 PDF로 저장해 두세요.
+      모든 무늬는 이 도구가 그 자리에서 계산해 그리는 것이라 저작권 걱정 없이 인쇄해 나눠 줘도 됩니다.</p>
+  </details>
+
+  <details>
+    <summary>인쇄하면 선이 흐리거나 깨지지 않나요?</summary>
+    <p>PDF의 선은 <b>벡터</b>(확대해도 깨지지 않는 선)로 넣습니다. A4로 찍어도, 확대 복사해 A3로 찍어도 선이 매끄럽습니다. PNG는 300dpi(A4 2480×3508 픽셀)로 저장합니다.</p>
+  </details>
+
+  <details>
+    <summary>여러 장을 한 번에 만들 수 있나요?</summary>
+    <p>사진을 고를 때 여러 장을 한꺼번에 고르거나, 넣은 뒤에 ＋ 칸을 눌러 더 넣으세요(최대 40장). 사진마다 자를 부분은 따로, 세밀함·선 굵기·종이 꾸미기는 모든 쪽에 똑같이 적용되어
+      <b>PDF 한 파일</b>로 저장됩니다. 만다라도 ＋ 한 장 더로 쪽을 늘립니다.</p>
+  </details>
+
+  <details>
+    <summary>사진이 서버로 올라가나요?</summary>
+    <p>올라가지 않습니다. 선을 뽑고 번호를 매기고 PDF·PNG를 만드는 일이 모두 <b>이 브라우저 안에서</b> 끝납니다. 고른 설정(종류·세밀함·선 굵기)만 다음에 쓰기 편하게 이 브라우저에 기억해 둡니다.
+      페이지를 연 뒤 인터넷을 끊어도 그대로 동작합니다.</p>
+  </details>
+
+  <details>
+    <summary>네이버·카카오톡 앱에서 열었더니 저장이 안 돼요</summary>
+    <p>앱 안에서 열리는 화면(인앱 브라우저)은 <b>파일 내려받기가 막혀 있는 경우가 많습니다.</b>
+      그래서 앱 안에서 열면 안내 창이 먼저 뜹니다. <b>크롬에서 열기</b>(아이폰은 주소 복사 후 사파리)로 옮긴 다음 써 주세요.</p>
+  </details>
+</section>
+
+<!-- ══ 주의 문구 ══ -->
+<div class="nbx">
+  <div class="nbx-h"><span class="ic">!</span><span>도안을 쓰기 전에 확인하세요</span></div>
+  <ul>
+    <li>선은 사진의 <b>색이 바뀌는 곳</b>을 따라 자동으로 긋습니다. 사진에 따라 얼굴 표정 같은 부분이 생략되거나 선이 어색하게 나올 수 있으니, 인쇄 전에 미리보기로 꼭 확인하세요.</li>
+    <li>숫자 색칠의 색 이름·색 코드는 화면에서 뽑은 <b>비슷한 색의 길잡이</b>입니다. 모니터·프린터·물감마다 색이 달라 보입니다.</li>
+    <li>만화·캐릭터·다른 사람의 그림이나 사진으로 만든 도안은 <b>집에서 개인적으로</b> 칠하는 데만 쓰세요. 인쇄해 팔거나, 블로그·카페·수업 자료로 배포하면 저작권 침해가 될 수 있습니다.</li>
+    <li>다른 사람(특히 아이)이 나온 사진은 본인이나 보호자의 동의를 받고 쓰고, 이름을 적은 활동지를 온라인에 올릴 때는 개인정보가 드러나지 않게 하세요.</li>
+    <li>물감·마카·크레파스는 어린아이가 입에 넣지 않도록 보호자가 곁에서 지켜봐 주세요.</li>
+  </ul>
+  <p class="nbx-f">이 도구는 <b>있는 그대로 제공되며</b>, 만든 도안이나 이를 사용해 발생한
+    어떠한 손해(저작권 분쟁·인쇄 결과 포함)에 대해서도 <b>제작자와 운영자는 법적 책임을 지지 않습니다.</b></p>
+</div>
+
+<footer>
+  <b>색칠공부 도안 만들기</b> · 업로드 없이 브라우저에서 처리<br>
+  선 그림 색칠공부 · 숫자 색칠 · 만다라 무늬 · 외부 라이브러리 없음<br>
+  고른 설정 말고는 아무것도 저장·전송하지 않으며, 페이지를 연 뒤에는 인터넷 없이도 동작합니다.
+</footer>
+</div>
+
+<!-- 앱 안(네이버·카카오톡 등)에서 열렸을 때 사용을 막는 창.
+     WebView 는 파일 내려받기를 못 해서, 도안을 다 만들어도 PDF가 저장되지 않는다 -->
+<div class="iamodal" id="iaModal" role="dialog" aria-modal="true" aria-labelledby="iaTitle">
+  <div class="iasheet">
+    <div class="iaic">📱</div>
+    <h2 id="iaTitle">앱 안에서는 도안 PDF를 저장할 수 없습니다</h2>
+    <p class="iap" id="iaDesc"></p>
+    <ol class="iasteps" id="iaSteps"></ol>
+    <button class="iabtn" id="iaGo2" type="button">크롬에서 열기</button>
+    <p class="iafine"><button type="button" id="iaStay">저장은 안 해도 돼요 · 그냥 볼게요</button></p>
+  </div>
+</div>
+
+<!-- 광고 자리 ⑤ 하단 오버형 320×50(모바일) — 읽는 구간에서만 올라오고, 고르는 중·미리보기 중·창이 열렸을 때는
+     내려가 있습니다. 바 높이만큼 본문 아래 여백을 늘려 아무것도 가리지 않습니다 -->
+<div id="anchor"><span class="amk">광고</span><div class="ad-slot" id="ad-anchor"></div>
+  <button class="axl" id="anchorX" type="button" aria-label="광고 닫기">✕</button></div>
+
+<div id="mbar"><div class="in"><div class="k">도안 미리보기 · 저장<b id="mbarTxt">도안</b></div><button class="go" id="mbarGo" type="button">미리보기 ↑</button></div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+"use strict";
+/* ══════════════════════════════════════════════════════════════
+   색칠공부 도안 만들기 — 사진 → 색 영역 나누기 → 경계선(벡터) → 번호 → PDF·PNG
+   처리는 모두 이 브라우저 안에서 끝난다(서버로 보내는 코드 없음).
+     ① 자른 부분을 작업 크기로 줄이고, 진한 테두리 선(만화·캐릭터 그림)을 따로 떼어 둔다
+     ② 경계를 살리는 흐림(가로·세로 양방향 필터) → CIELAB k-means 로 색 N개
+     ③ 3×3 다수결로 잡티 정리 → 이어진 영역 나누기
+     ④ 너무 작은 영역·가는 띠(거리 변환으로 두께를 잰다)는 가장 길게 맞닿은 이웃에 합친다
+     ⑤ 영역 사이 경계를 픽셀 모서리 격자에서 따라가 선 조각으로 만들고, 가우스로 매끈하게 편다
+     ⑥ 영역 안에서 경계와 가장 먼 점(거리 변환 최대점)에 번호를 놓는다
+   ══════════════════════════════════════════════════════════════ */
+const $ = s => document.querySelector(s);
+const PT = 72 / 25.4;                /* 1mm = 2.8346pt */
+const TILE_K = 16;                   /* PDF 글자 그림 해상도 — mm 당 16px */
+const LS = 'coloring_page.opt';
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const escH = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmtN = n => Math.round(n).toLocaleString('ko-KR');
+function toast(msg, ms, act) {
+  const t = $('#toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.toggle('act', !!act);
+  if (act) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = act.label;
+    b.addEventListener('click', () => { t.classList.remove('show'); act.fn(); });
+    t.appendChild(b);
+  }
+  t.classList.add('show');
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), ms || 2600);
+}
+const sleep0 = () => new Promise(r => setTimeout(r, 0));
+function fmtSize(b) { return b < 1024 ? b + 'B' : b < 1048576 ? (b / 1024).toFixed(0) + 'KB' : (b / 1048576).toFixed(1) + 'MB'; }
+const hex2 = v => clamp(Math.round(v), 0, 255).toString(16).padStart(2, '0');
+const rgbHex = (r, g, b) => '#' + hex2(r) + hex2(g) + hex2(b);
+function hex2rgb(h) { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function lumOf(r, g, b) { return (0.299 * r + 0.587 * g + 0.114 * b) / 255; }
+function inkOn(hex) { const [r, g, b] = hex2rgb(hex); return lumOf(r, g, b) > 0.56 ? '#1d1418' : '#ffffff'; }
+function makeCanvas(w, h) { const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; }
+
+/* ── 색 공간 ── sRGB(0~255) → CIELAB(D65) */
+function linC(v) { v = clamp(v, 0, 255) / 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+function labF(t) { return t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116; }
+function rgb2lab(r, g, b) {
+  const R = linC(r), G = linC(g), B = linC(b);
+  const x = labF((0.4124564 * R + 0.3575761 * G + 0.1804375 * B) / 0.95047);
+  const y = labF(0.2126729 * R + 0.7151522 * G + 0.0721750 * B);
+  const z = labF((0.0193339 * R + 0.1191920 * G + 0.9503041 * B) / 1.08883);
+  return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
+}
+
+/* ── 색 이름 ── 물감·색연필 회사 번호 대신 누구나 알아듣는 이름(대략) */
+function colorName(r, g, b) {
+  const mx = Math.max(r, g, b) / 255, mn = Math.min(r, g, b) / 255, l = (mx + mn) / 2, d = mx - mn;
+  const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+  if (s < 0.13 || d < 0.07) return l > 0.93 ? '흰색' : l > 0.8 ? '아주 연한 회색' : l > 0.62 ? '연한 회색' : l > 0.42 ? '회색' : l > 0.2 ? '진한 회색' : '검정';
+  let h;
+  const R = r / 255, G = g / 255, B = b / 255;
+  if (mx === R) h = ((G - B) / d + 6) % 6; else if (mx === G) h = (B - R) / d + 2; else h = (R - G) / d + 4;
+  h *= 60;
+  let base;
+  if (h < 12 || h >= 345) base = '빨강';
+  else if (h < 40) base = '주황';
+  else if (h < 64) base = '노랑';
+  else if (h < 88) base = '연두';
+  else if (h < 155) base = '초록';
+  else if (h < 186) base = '청록';
+  else if (h < 206) base = '하늘';
+  else if (h < 250) base = '파랑';
+  else if (h < 285) base = '보라';
+  else if (h < 322) base = '자주';
+  else base = '분홍';
+  if (base === '빨강' && l > 0.7) base = '분홍';
+  if (((base === '주황' || base === '노랑') && l < 0.42 && h < 50) || (base === '주황' && s < 0.55 && l < 0.55)) base = '갈색';
+  else if ((base === '주황' || base === '노랑') && s < 0.62 && l > 0.62 && l < 0.9) base = '베이지';
+  else if (base === '주황' && l > 0.72) base = '살구';
+  if (base === '파랑' && l < 0.3) base = '남색';
+  if ((base === '노랑' || base === '연두') && l < 0.36) base = '올리브';
+  let pre = '';
+  if (l > 0.86) pre = '아주 연한 ';
+  else if (l > 0.7 && base !== '분홍' && base !== '베이지' && base !== '살구') pre = '연한 ';
+  else if (l < 0.18) pre = '아주 진한 ';
+  else if (l < 0.32 && base !== '남색') pre = '진한 ';
+  if (s < 0.3 && !pre && base !== '베이지' && base !== '갈색') pre = '탁한 ';
+  return pre + base;
+}
+
+/* ── 색 N 개 ── 같은 색(6비트)은 한 점으로 묶어 무게로 센다. 시작점은 무게·거리로 고르는 결정적 k-means++ */
+function quantize(R, G, B, A, K) {
+  const m = new Map();
+  for (let i = 0; i < R.length; i++) {
+    if (A[i] < 0.5) continue;
+    const key = ((R[i] | 0) >> 2) << 12 | ((G[i] | 0) >> 2) << 6 | ((B[i] | 0) >> 2);
+    let e = m.get(key);
+    if (!e) { e = [0, 0, 0, 0]; m.set(key, e); }
+    e[0]++; e[1] += R[i]; e[2] += G[i]; e[3] += B[i];
+  }
+  const P = m.size;
+  if (!P) return [{ r: 255, g: 255, b: 255 }];
+  const pw = new Float64Array(P), pr = new Float64Array(P), pg = new Float64Array(P), pb = new Float64Array(P);
+  const pL = new Float64Array(P), pA = new Float64Array(P), pB = new Float64Array(P);
+  let j = 0;
+  for (const e of m.values()) {
+    pw[j] = e[0]; pr[j] = e[1] / e[0]; pg[j] = e[2] / e[0]; pb[j] = e[3] / e[0];
+    const l = rgb2lab(pr[j], pg[j], pb[j]); pL[j] = l[0]; pA[j] = l[1]; pB[j] = l[2];
+    j++;
+  }
+  if (P <= K) {
+    const out = [];
+    for (let i = 0; i < P; i++) out.push({ r: pr[i], g: pg[i], b: pb[i] });
+    return out;
+  }
+  const cL = [], cA = [], cB = [];
+  let best = 0;
+  for (let i = 1; i < P; i++) if (pw[i] > pw[best]) best = i;
+  cL.push(pL[best]); cA.push(pA[best]); cB.push(pB[best]);
+  const D = new Float64Array(P).fill(Infinity);
+  while (cL.length < K) {
+    const c = cL.length - 1;
+    let bi = -1, bv = -1;
+    for (let i = 0; i < P; i++) {
+      const dl = pL[i] - cL[c], da = pA[i] - cA[c], db = pB[i] - cB[c], dd = dl * dl + da * da + db * db;
+      if (dd < D[i]) D[i] = dd;
+      const v = D[i] * Math.sqrt(pw[i]);
+      if (v > bv) { bv = v; bi = i; }
+    }
+    if (bv <= 0) break;
+    cL.push(pL[bi]); cA.push(pA[bi]); cB.push(pB[bi]);
+  }
+  const k = cL.length, asg = new Int32Array(P);
+  const sL = new Float64Array(k), sA = new Float64Array(k), sB = new Float64Array(k), sW = new Float64Array(k);
+  const sr = new Float64Array(k), sg = new Float64Array(k), sb = new Float64Array(k);
+  for (let it = 0; it < 24; it++) {
+    sL.fill(0); sA.fill(0); sB.fill(0); sW.fill(0); sr.fill(0); sg.fill(0); sb.fill(0);
+    for (let i = 0; i < P; i++) {
+      let bc = 0, bd = Infinity;
+      for (let c = 0; c < k; c++) {
+        const dl = pL[i] - cL[c], da = pA[i] - cA[c], db = pB[i] - cB[c], dd = dl * dl + da * da + db * db;
+        if (dd < bd) { bd = dd; bc = c; }
+      }
+      asg[i] = bc; D[i] = bd;
+      const w = pw[i];
+      sL[bc] += pL[i] * w; sA[bc] += pA[i] * w; sB[bc] += pB[i] * w; sW[bc] += w;
+      sr[bc] += pr[i] * w; sg[bc] += pg[i] * w; sb[bc] += pb[i] * w;
+    }
+    let moved = 0;
+    for (let c = 0; c < k; c++) {
+      if (sW[c] === 0) {
+        let bi = 0, bv = -1;
+        for (let i = 0; i < P; i++) { const v = D[i] * pw[i]; if (v > bv) { bv = v; bi = i; } }
+        cL[c] = pL[bi]; cA[c] = pA[bi]; cB[c] = pB[bi]; D[bi] = 0; moved += 100;
+        continue;
+      }
+      const nl = sL[c] / sW[c], na = sA[c] / sW[c], nb = sB[c] / sW[c];
+      moved += Math.abs(nl - cL[c]) + Math.abs(na - cA[c]) + Math.abs(nb - cB[c]);
+      cL[c] = nl; cA[c] = na; cB[c] = nb;
+    }
+    if (moved < 0.05 * k) break;
+  }
+  const out = [];
+  for (let c = 0; c < k; c++) if (sW[c] > 0) out.push({ r: sr[c] / sW[c], g: sg[c] / sW[c], b: sb[c] / sW[c] });
+  return out;
+}
+
+/* ══ 거리 변환 ══ 영역마다 「가장 가까운 다른 영역(또는 그림 가장자리)까지의 거리」.
+   경계에 닿은 픽셀이 1, 안쪽으로 갈수록 커진다(모따기 1·√2 두 번 훑기) */
+function distMap(lab, W, H) {
+  const n = W * H, d = new Float32Array(n), INF = 1e9;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = y * W + x, v = lab[i];
+    const edge = x === 0 || y === 0 || x === W - 1 || y === H - 1 ||
+      lab[i - 1] !== v || lab[i + 1] !== v || lab[i - W] !== v || lab[i + W] !== v;
+    d[i] = edge ? 1 : INF;
+  }
+  const S = Math.SQRT2;
+  for (let y = 1; y < H; y++) for (let x = 1; x < W - 1; x++) {
+    const i = y * W + x;
+    if (d[i] <= 1) continue;
+    let m = d[i];
+    const a = d[i - 1] + 1, b = d[i - W] + 1, c = d[i - W - 1] + S, e = d[i - W + 1] + S;
+    if (a < m) m = a; if (b < m) m = b; if (c < m) m = c; if (e < m) m = e;
+    d[i] = m;
+  }
+  for (let y = H - 2; y >= 0; y--) for (let x = W - 2; x >= 1; x--) {
+    const i = y * W + x;
+    if (d[i] <= 1) continue;
+    let m = d[i];
+    const a = d[i + 1] + 1, b = d[i + W] + 1, c = d[i + W + 1] + S, e = d[i + W - 1] + S;
+    if (a < m) m = a; if (b < m) m = b; if (c < m) m = c; if (e < m) m = e;
+    d[i] = m;
+  }
+  return d;
+}
+
+/* ══ 작은 이진 힙 ══ (값이 작은 것부터) */
+class MinHeap {
+  constructor() { this.k = []; this.v = []; }
+  get size() { return this.k.length; }
+  push(key, val) {
+    const K = this.k, V = this.v;
+    let i = K.length; K.push(key); V.push(val);
+    while (i > 0) { const p = (i - 1) >> 1; if (K[p] <= K[i]) break; [K[p], K[i]] = [K[i], K[p]]; [V[p], V[i]] = [V[i], V[p]]; i = p; }
+  }
+  pop() {
+    const K = this.k, V = this.v, top = V[0], last = K.length - 1;
+    K[0] = K[last]; V[0] = V[last]; K.pop(); V.pop();
+    let i = 0;
+    for (;;) {
+      const l = 2 * i + 1, r = l + 1;
+      let m = i;
+      if (l < K.length && K[l] < K[m]) m = l;
+      if (r < K.length && K[r] < K[m]) m = r;
+      if (m === i) break;
+      [K[m], K[i]] = [K[i], K[m]]; [V[m], V[i]] = [V[i], V[m]]; i = m;
+    }
+    return top;
+  }
+}
+
+/* ══ 영역 나누기 ══
+   src: 캔버스(이미 돌리고 자른 것), P: { work, k, minArea(px), thin(px), ink(bool), sigma }
+   돌려주는 것: { W, H, lab(영역 번호), col(영역 → 색 번호), pal, n(영역 수), chains, labels } */
+function segment(src, P) {
+  const sw = src.width, sh = src.height, sc = Math.min(1, P.work / Math.max(sw, sh));
+  const W = Math.max(8, Math.round(sw * sc)), H = Math.max(8, Math.round(sh * sc)), n = W * H;
+  const cv = makeCanvas(W, H), ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(src, 0, 0, W, H);
+  const d = ctx.getImageData(0, 0, W, H).data;
+  cv.width = cv.height = 1;
+  let R = new Float32Array(n), G = new Float32Array(n), B = new Float32Array(n);
+  const Lum = new Float32Array(n);
+  for (let i = 0; i < n; i++) { R[i] = d[i * 4]; G[i] = d[i * 4 + 1]; B[i] = d[i * 4 + 2]; Lum[i] = 0.299 * R[i] + 0.587 * G[i] + 0.114 * B[i]; }
+
+  /* ① 진한 테두리 선 — 어둡고(밝기 70 아래) 가는(두께가 작업 크기의 0.7% 이하) 덩어리.
+        만화·캐릭터 그림의 검은 윤곽선을 색 영역으로 세면 선 양쪽에 두 줄이 생긴다 → 선은 빼 두고
+        양옆 영역이 선 가운데서 만나게 해 한 줄로 만든다. 눈동자처럼 두꺼운 검정은 영역으로 남는다 */
+  const ink = new Uint8Array(n);
+  if (P.ink) {
+    const dark = new Int32Array(n);
+    let nd = 0;
+    for (let i = 0; i < n; i++) {
+      const mx = Math.max(R[i], G[i], B[i]), mn = Math.min(R[i], G[i], B[i]);
+      if (Lum[i] < 80 && mx - mn < 70) { dark[i] = 1; nd++; }
+    }
+    if (nd > 0 && nd < n * 0.35) {
+      /* 픽셀마다 「둘레에서 가장 두꺼운 곳」을 본다 — 거리 변환의 최대값을 반지름 half 창으로 번진다.
+         덩어리 단위로 재면 눈·코에 붙은 선까지 두껍다고 잘못 본다 */
+      const dd = distMap(dark, W, H);
+      const half = Math.max(2, Math.round(Math.max(W, H) * 0.008));
+      const loc = new Float32Array(n), tmp = new Float32Array(n);
+      for (let i = 0; i < n; i++) tmp[i] = dark[i] ? dd[i] : 0;
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        let m = 0;
+        for (let k = Math.max(0, x - half), e = Math.min(W - 1, x + half); k <= e; k++) { const v = tmp[y * W + k]; if (v > m) m = v; }
+        loc[y * W + x] = m;
+      }
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        let m = 0;
+        for (let k = Math.max(0, y - half), e = Math.min(H - 1, y + half); k <= e; k++) { const v = loc[k * W + x]; if (v > m) m = v; }
+        tmp[y * W + x] = m;
+      }
+      for (let i = 0; i < n; i++) if (dark[i] && tmp[i] <= half) ink[i] = 1;
+      /* 선 가장자리의 흐린 회색(안티에일리어싱)도 선에 붙인다 — 남기면 가는 중간색 띠가 된다 */
+      for (let it = 0; it < 2; it++) {
+        const add = [];
+        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+          const i = y * W + x;
+          if (ink[i] || Lum[i] > 175) continue;
+          if ((x > 0 && ink[i - 1]) || (x < W - 1 && ink[i + 1]) || (y > 0 && ink[i - W]) || (y < H - 1 && ink[i + W])) add.push(i);
+        }
+        for (const i of add) ink[i] = 1;
+      }
+    }
+  }
+
+  /* ② 경계를 살리는 흐림 — 가로 한 번, 세로 한 번(색 차이가 크면 덜 섞는다). 선 픽셀은 섞지 않는다 */
+  const rad = P.sigma, sr2 = 2 * 18 * 18, ws = [];
+  for (let k = -rad; k <= rad; k++) ws.push(Math.exp(-(k * k) / (2 * Math.max(1, rad * 0.6) ** 2)));
+  for (let pass = 0; pass < 2 && rad > 0; pass++) {
+    const R2 = new Float32Array(n), G2 = new Float32Array(n), B2 = new Float32Array(n);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const i = y * W + x;
+      if (ink[i]) { R2[i] = R[i]; G2[i] = G[i]; B2[i] = B[i]; continue; }
+      let sr = 0, sg = 0, sb = 0, sw2 = 0;
+      for (let k = -rad; k <= rad; k++) {
+        const xx = pass ? x : x + k, yy = pass ? y + k : y;
+        if (xx < 0 || yy < 0 || xx >= W || yy >= H) continue;
+        const j = yy * W + xx;
+        if (ink[j]) continue;
+        const dr = R[j] - R[i], dg = G[j] - G[i], db = B[j] - B[i];
+        const w = ws[k + rad] * Math.exp(-(dr * dr + dg * dg + db * db) / sr2);
+        sr += R[j] * w; sg += G[j] * w; sb += B[j] * w; sw2 += w;
+      }
+      R2[i] = sr / sw2; G2[i] = sg / sw2; B2[i] = sb / sw2;
+    }
+    R = R2; G = G2; B = B2;
+  }
+
+  /* ③ 색 N 개와 가까운 색 배정(선 픽셀은 -1 로 둔다) */
+  const A = new Float32Array(n);
+  for (let i = 0; i < n; i++) A[i] = ink[i] ? 0 : 1;
+  const pal0 = quantize(R, G, B, A, P.k);
+  const PL = pal0.map(c => rgb2lab(c.r, c.g, c.b)), K = pal0.length;
+  let ci = new Int32Array(n).fill(-1);
+  for (let i = 0; i < n; i++) {
+    if (ink[i]) continue;
+    const l = rgb2lab(R[i], G[i], B[i]);
+    let bc = 0, bd = Infinity;
+    for (let c = 0; c < K; c++) {
+      const a = l[0] - PL[c][0], b = l[1] - PL[c][1], e = l[2] - PL[c][2], dd = a * a + b * b + e * e;
+      if (dd < bd) { bd = dd; bc = c; }
+    }
+    ci[i] = bc;
+  }
+
+  /* ④ 다수결 — 들쭉날쭉한 가장자리와 잡티. 반지름 2(5×5)는 그러데이션 띠 경계의 물결까지 편다(선 픽셀은 표를 안 던진다) */
+  const cnt = new Int32Array(K), mr0 = P.mode || 1;
+  for (let it = 0; it < (mr0 > 1 ? 3 : 2); it++) {
+    const o = new Int32Array(n);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const i = y * W + x, me = ci[i];
+      if (me < 0) { o[i] = -1; continue; }
+      const x0 = -Math.min(mr0, x), x1 = Math.min(mr0, W - 1 - x), y0 = -Math.min(mr0, y), y1 = Math.min(mr0, H - 1 - y);
+      for (let dy = y0; dy <= y1; dy++) for (let dx = x0; dx <= x1; dx++) { const c = ci[i + dy * W + dx]; if (c >= 0) cnt[c]++; }
+      let bc = me, bv = cnt[me];
+      for (let dy = y0; dy <= y1; dy++) for (let dx = x0; dx <= x1; dx++) {
+        const c = ci[i + dy * W + dx];
+        if (c >= 0 && cnt[c] > bv) { bv = cnt[c]; bc = c; }
+      }
+      for (let dy = y0; dy <= y1; dy++) for (let dx = x0; dx <= x1; dx++) { const c = ci[i + dy * W + dx]; if (c >= 0) cnt[c] = 0; }
+      o[i] = bc;
+    }
+    ci = o;
+  }
+
+  /* ⑤ 이어진 영역(선 픽셀 제외) → 선 픽셀은 양옆 영역이 같은 속도로 번져 채운다.
+        선이 「벽」 노릇을 해서, 같은 색이라도 선으로 나뉜 곳(다리·꽃잎)은 다른 영역으로 남는다 */
+  const lab = new Int32Array(n).fill(-1);
+  const col = [], area = [], sumL = [], sumA = [], sumB = [];
+  {
+    const st = [];
+    let id = 0;
+    for (let s = 0; s < n; s++) {
+      if (lab[s] >= 0 || ci[s] < 0) continue;
+      const c = ci[s];
+      lab[s] = id; st.length = 0; st.push(s);
+      let a = 0;
+      while (st.length) {
+        const i = st.pop(), x = i % W; a++;
+        if (x > 0 && lab[i - 1] < 0 && ci[i - 1] === c) { lab[i - 1] = id; st.push(i - 1); }
+        if (x < W - 1 && lab[i + 1] < 0 && ci[i + 1] === c) { lab[i + 1] = id; st.push(i + 1); }
+        if (i >= W && lab[i - W] < 0 && ci[i - W] === c) { lab[i - W] = id; st.push(i - W); }
+        if (i < n - W && lab[i + W] < 0 && ci[i + W] === c) { lab[i + W] = id; st.push(i + W); }
+      }
+      col.push(c); area.push(a); sumL.push(0); sumA.push(0); sumB.push(0); id++;
+    }
+    if (!col.length) { col.push(0); area.push(0); sumL.push(0); sumA.push(0); sumB.push(0); }
+    let front = [];
+    for (let i = 0; i < n; i++) if (lab[i] < 0) {
+      const x = i % W, y = (i / W) | 0;
+      if ((x > 0 && lab[i - 1] >= 0) || (x < W - 1 && lab[i + 1] >= 0) || (y > 0 && lab[i - W] >= 0) || (y < H - 1 && lab[i + W] >= 0)) front.push(i);
+    }
+    const tally = new Map();
+    let guard = 0;
+    while (front.length && guard++ < 5000) {
+      const set = [];
+      for (const i of front) {
+        if (lab[i] >= 0) continue;
+        const x = i % W, y = (i / W) | 0;
+        tally.clear();
+        const add = j => { const c = lab[j]; if (c >= 0) tally.set(c, (tally.get(c) || 0) + 1); };
+        if (x > 0) add(i - 1); if (x < W - 1) add(i + 1); if (y > 0) add(i - W); if (y < H - 1) add(i + W);
+        let bc = -1, bv = 0;
+        for (const [c, v] of tally) if (v > bv) { bv = v; bc = c; }
+        if (bc >= 0) set.push(i, bc);
+      }
+      const nf2 = [];
+      for (let q = 0; q < set.length; q += 2) { if (lab[set[q]] < 0) { lab[set[q]] = set[q + 1]; area[set[q + 1]]++; } }
+      for (let q = 0; q < set.length; q += 2) {
+        const i = set[q], x = i % W, y = (i / W) | 0;
+        if (x > 0 && lab[i - 1] < 0) nf2.push(i - 1); if (x < W - 1 && lab[i + 1] < 0) nf2.push(i + 1);
+        if (y > 0 && lab[i - W] < 0) nf2.push(i - W); if (y < H - 1 && lab[i + W] < 0) nf2.push(i + W);
+      }
+      front = nf2;
+    }
+    for (let i = 0; i < n; i++) if (lab[i] < 0) { lab[i] = 0; area[0]++; }
+  }
+  const R0 = col.length;
+  /* 영역마다 실제 색의 합(Lab) — 비슷한 색 합치기는 k-means 색이 아니라 이 평균으로 잰다. 선 픽셀은 빼고 */
+  const cntC = new Float64Array(R0), LL = new Float32Array(n), LA = new Float32Array(n), LB = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const l = rgb2lab(R[i], G[i], B[i]);
+    LL[i] = l[0]; LA[i] = l[1]; LB[i] = l[2];
+    if (ink[i]) continue;
+    const r = lab[i];
+    sumL[r] += l[0]; sumA[r] += l[1]; sumB[r] += l[2]; cntC[r]++;
+  }
+  for (let r = 0; r < R0; r++) if (!cntC[r]) { const l = PL[col[r]]; sumL[r] = l[0]; sumA[r] = l[1]; sumB[r] = l[2]; cntC[r] = 1; }
+  /* 영역별 픽셀 목록(처음 영역 기준) — 합쳐도 「어떤 처음 영역들로 이루어졌나」만 기억한다 */
+  const start = new Int32Array(R0 + 1);
+  for (let i = 0; i < n; i++) start[lab[i] + 1]++;
+  for (let r = 0; r < R0; r++) start[r + 1] += start[r];
+  const pix = new Int32Array(n), fill = start.slice(0, R0);
+  for (let i = 0; i < n; i++) pix[fill[lab[i]]++] = i;
+  const members = [];
+  for (let r = 0; r < R0; r++) members.push([r]);
+  const alive = new Uint8Array(R0).fill(1);
+  /* 맞닿은 이웃 → 맞닿은 길이. soft 는 선을 사이에 두지 않고 색으로만 나뉜 길이,
+     edge 는 그 경계를 사이에 둔 두 픽셀의 색 차이 합(경계가 얼마나 또렷한가 — 그러데이션 띠는 흐릿하다) */
+  const adj = [], soft = [], edge = [];
+  for (let r = 0; r < R0; r++) { adj.push(new Map()); soft.push(new Map()); edge.push(new Map()); }
+  const link = (M, a, b, k) => { M[a].set(b, (M[a].get(b) || 0) + k); M[b].set(a, (M[b].get(a) || 0) + k); };
+  const jump = (i, j) => Math.sqrt((LL[i] - LL[j]) ** 2 + (LA[i] - LA[j]) ** 2 + (LB[i] - LB[j]) ** 2);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = y * W + x, v = lab[i];
+    if (x < W - 1 && lab[i + 1] !== v) { link(adj, v, lab[i + 1], 1); if (!ink[i] && !ink[i + 1]) { link(soft, v, lab[i + 1], 1); link(edge, v, lab[i + 1], jump(x > 0 ? i - 1 : i, x < W - 2 ? i + 2 : i + 1)); } }
+    if (y < H - 1 && lab[i + W] !== v) { link(adj, v, lab[i + W], 1); if (!ink[i] && !ink[i + W]) { link(soft, v, lab[i + W], 1); link(edge, v, lab[i + W], jump(y > 0 ? i - W : i, y < H - 2 ? i + 2 * W : i + W)); } }
+  }
+  const eachPix = (r, fn) => { for (const m of members[r]) for (let q = start[m]; q < start[m + 1]; q++) fn(pix[q]); };
+  const mean = r => [sumL[r] / cntC[r], sumA[r] / cntC[r], sumB[r] / cntC[r]];
+  const cdist = (a, b) => { const p = mean(a), q = mean(b); return Math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 + (p[2] - q[2]) ** 2); };
+  const ver = new Int32Array(R0);
+  const moveAdj = (M, a, b) => {
+    for (const [v, len] of M[a]) {
+      M[v].delete(a);
+      if (v === b) continue;
+      M[b].set(v, (M[b].get(v) || 0) + len);
+      M[v].set(b, (M[v].get(b) || 0) + len);
+    }
+    M[a] = new Map(); M[b].delete(a);
+  };
+  const mergeInto = (a, b) => {
+    eachPix(a, i => { lab[i] = b; });
+    for (const m of members[a]) members[b].push(m);
+    members[a] = [];
+    moveAdj(adj, a, b); moveAdj(soft, a, b); moveAdj(edge, a, b);
+    area[b] += area[a]; sumL[b] += sumL[a]; sumA[b] += sumA[a]; sumB[b] += sumB[a]; cntC[b] += cntC[a];
+    area[a] = 0; alive[a] = 0; ver[b]++;
+  };
+  /* 합칠 곳 — 길게 맞닿을수록, 색이 비슷할수록 */
+  const bestNb = r => {
+    let bn = -1, bs = -1;
+    for (const [v, len] of adj[r]) {
+      const sc = len / (1 + cdist(r, v) / 12);
+      if (sc > bs) { bs = sc; bn = v; }
+    }
+    return bn;
+  };
+  /* 선 없이 색으로만 맞닿은 같은 색 번호끼리 하나로 */
+  const mergeSame = () => {
+    for (let r = 0; r < R0; r++) {
+      if (!alive[r]) continue;
+      for (const [v, len] of [...soft[r]]) {
+        if (!alive[v] || !alive[r] || col[v] !== col[r] || len < 2) continue;
+        if (area[v] > area[r]) { mergeInto(r, v); break; } else mergeInto(v, r);
+      }
+    }
+  };
+
+  /* ⑥ 작은 영역 합치기 — 작은 것부터 */
+  {
+    const hp = new MinHeap();
+    for (let r = 0; r < R0; r++) if (area[r] < P.minArea) hp.push(area[r], r);
+    let guard = 0;
+    while (hp.size && guard++ < R0 * 4) {
+      const r = hp.pop();
+      if (!alive[r] || area[r] >= P.minArea) continue;
+      const b = bestNb(r);
+      if (b < 0) continue;
+      mergeInto(r, b);
+      if (area[b] < P.minArea) hp.push(area[b], b);
+    }
+  }
+  /* 비슷한 색 이웃 합치기 — 그러데이션(하늘·그림자)이 띠로 갈라진 것을 되붙인다. 가까운 쌍부터.
+     선으로 나뉜 이웃은 건드리지 않는다. 숫자 색칠은 색 번호가 같은 이웃만(T = 0) */
+  {
+    const hp = new MinHeap(), T = P.mergeDE || 0, ET = P.edgeT || 0;
+    /* 합칠 쌍 — 같은 색 번호이거나, 경계가 흐릿하고(양옆 두 칸 사이 색 차이 평균 < ET) 평균색도 아주 다르진 않거나 */
+    const want = (a, b) => {
+      const len = soft[a].get(b) || 0;
+      if (len < 2) return -2;
+      if (col[a] === col[b]) return -1;
+      const e = (edge[a].get(b) || 0) / len, d = cdist(a, b);
+      if (e < ET && d < 45) return e;
+      return d < T ? ET + d : -2;
+    };
+    for (let r = 0; r < R0; r++) for (const v of soft[r].keys()) if (v > r) { const k = want(r, v); if (k > -2) hp.push(k, [r, v, ver[r], ver[v]]); }
+    let guard = 0;
+    while (hp.size && guard++ < R0 * 8) {
+      const [a, b, va, vb] = hp.pop();
+      if (!alive[a] || !alive[b] || ver[a] !== va || ver[b] !== vb) continue;
+      const [big, small] = area[a] >= area[b] ? [a, b] : [b, a];
+      mergeInto(small, big);
+      for (const v of soft[big].keys()) { const k = want(big, v); if (k > -2) hp.push(k, [big, v, ver[big], ver[v]]); }
+    }
+  }
+
+  /* ⑦ 가는 띠 합치기 — 두께(거리 변환 최대값)가 기준보다 얇으면 번호도 못 넣고 칠하기도 어렵다 */
+  let dm = null;
+  const maxD = new Float32Array(R0), maxAt = new Int32Array(R0);
+  const measure = () => {
+    dm = distMap(lab, W, H);
+    maxD.fill(0);
+    for (let i = 0; i < n; i++) { const r = lab[i]; if (dm[i] > maxD[r]) { maxD[r] = dm[i]; maxAt[r] = i; } }
+  };
+  for (let pass = 0; pass < 6; pass++) {
+    measure();
+    const thin = [];
+    for (let r = 0; r < R0; r++) if (alive[r] && maxD[r] < P.thin) thin.push(r);
+    if (!thin.length) break;
+    thin.sort((a, b) => maxD[a] - maxD[b] || area[a] - area[b]);
+    let did = 0;
+    for (const r of thin) {
+      if (!alive[r]) continue;
+      const b = bestNb(r);
+      if (b >= 0) { mergeInto(r, b); did++; }
+    }
+    mergeSame();
+    if (!did) break;
+  }
+  measure();
+
+  /* ⑧ 번호 매기기 — 넓게 쓴 색이 1번. 안 쓰게 된 색은 버린다 */
+  const used = new Float64Array(K);
+  for (let r = 0; r < R0; r++) if (alive[r]) used[col[r]] += area[r];
+  const order = [...Array(K).keys()].filter(c => used[c] > 0).sort((a, b) => used[b] - used[a]);
+  const remap = new Int32Array(K).fill(-1);
+  order.forEach((c, j) => { remap[c] = j; });
+  const pal = order.map(c => {
+    const p = pal0[c], hex = rgbHex(p.r, p.g, p.b);
+    return { r: p.r, g: p.g, b: p.b, hex, name: colorName(p.r, p.g, p.b), area: used[c] / n, regions: 0 };
+  });
+  /* 이름이 겹치면 밝은 것부터 ①②③ — 「연한 파랑」이 세 개면 칠할 때 헷갈린다 */
+  const byName = new Map();
+  pal.forEach(p => { const a = byName.get(p.name) || []; a.push(p); byName.set(p.name, a); });
+  for (const a of byName.values()) if (a.length > 1) {
+    a.sort((p, q) => lumOf(q.r, q.g, q.b) - lumOf(p.r, p.g, p.b));
+    a.forEach((p, j) => { p.name += ' ' + '①②③④⑤⑥⑦⑧⑨⑩'[Math.min(j, 9)]; });
+  }
+  const rid = new Int32Array(R0).fill(-1), rcol = [], labels = [];
+  let nr = 0;
+  for (let r = 0; r < R0; r++) if (alive[r]) {
+    rid[r] = nr++;
+    const c = remap[col[r]];
+    rcol.push(c); pal[c].regions++;
+    const i = maxAt[r];
+    labels.push({ x: (i % W) + 0.5, y: ((i / W) | 0) + 0.5, r: maxD[r], c });
+  }
+  for (let i = 0; i < n; i++) lab[i] = rid[lab[i]];
+  /* 영역의 실제 평균색 — 선 그림의 「색칠 예시」는 이 색으로 칠해 보여 준다 */
+  const mr = new Float64Array(nr), mg = new Float64Array(nr), mb = new Float64Array(nr), mc = new Float64Array(nr);
+  for (let i = 0; i < n; i++) { const r = lab[i]; if (ink[i]) continue; mr[r] += R[i]; mg[r] += G[i]; mb[r] += B[i]; mc[r]++; }
+  const rmean = [];
+  for (let r = 0; r < nr; r++) { const p = pal[rcol[r]]; rmean.push(mc[r] ? rgbHex(mr[r] / mc[r], mg[r] / mc[r], mb[r] / mc[r]) : p.hex); }
+  const chains = traceChains(lab, W, H, P.smooth);
+  /* 열린 선(입·수염·털 결) — 영역 경계로는 안 남는 선 뼈대를 따로 따라가 붙인다 */
+  if (P.ink) for (const c of strokeChains(ink, lab, W, H, P.smooth)) chains.push(c);
+  return { W, H, lab, col: rcol, pal, n: nr, labels, chains, rmean };
+}
+
+/* ══ 열린 선 뼈대 ══ 선 픽셀을 한 픽셀 굵기로 깎고(장-수엔 세선화), 영역 경계에서 2.5픽셀 넘게 떨어진 뼈대만
+   따라가 선 조각으로 만든다. 끝이 경계 가까이면 경계까지 이어 붙인다 */
+function strokeChains(ink, lab, W, H, smooth) {
+  const n = W * H, sk = new Uint8Array(n);
+  let any = 0;
+  for (let i = 0; i < n; i++) if (ink[i]) { sk[i] = 1; any++; }
+  if (!any) return [];
+  const p = new Uint8Array(8);
+  const nb = (i, x, y) => {
+    const up = y > 0, dn = y < H - 1, lf = x > 0, rt = x < W - 1;
+    p[0] = up && sk[i - W] ? 1 : 0; p[1] = up && rt && sk[i - W + 1] ? 1 : 0; p[2] = rt && sk[i + 1] ? 1 : 0; p[3] = dn && rt && sk[i + W + 1] ? 1 : 0;
+    p[4] = dn && sk[i + W] ? 1 : 0; p[5] = dn && lf && sk[i + W - 1] ? 1 : 0; p[6] = lf && sk[i - 1] ? 1 : 0; p[7] = up && lf && sk[i - W - 1] ? 1 : 0;
+  };
+  for (let it = 0; it < 40; it++) {
+    let ch = 0;
+    for (let sub = 0; sub < 2; sub++) {
+      const del = [];
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const i = y * W + x;
+        if (!sk[i]) continue;
+        nb(i, x, y);
+        const Bn = p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + p[7];
+        if (Bn < 2 || Bn > 6) continue;
+        let An = 0;
+        for (let k = 0; k < 8; k++) if (!p[k] && p[(k + 1) % 8]) An++;
+        if (An !== 1) continue;
+        if (sub === 0 ? (p[0] * p[2] * p[4] || p[2] * p[4] * p[6]) : (p[0] * p[2] * p[6] || p[0] * p[4] * p[6])) continue;
+        del.push(i);
+      }
+      for (const i of del) sk[i] = 0;
+      ch += del.length;
+    }
+    if (!ch) break;
+  }
+  /* 계단 모서리 정리 — 이웃이 {위,오른쪽} 처럼 서로 대각선으로 이미 이어진 두 칸뿐이면 가운데 칸은 없어도 된다.
+     남겨 두면 그 칸이 갈림길(이웃 3)로 잡혀 선이 토막 난다 */
+  for (let y = 1; y < H - 1; y++) for (let x = 1; x < W - 1; x++) {
+    const i = y * W + x;
+    if (!sk[i]) continue;
+    nb(i, x, y);
+    const others = p[1] + p[3] + p[5] + p[7];
+    if (p[0] && p[2] && !p[4] && !p[6] && others === p[1] && !p[3] && !p[5] && !p[7]) sk[i] = 0;
+    else if (p[2] && p[4] && !p[0] && !p[6] && !p[1] && !p[5] && !p[7]) sk[i] = 0;
+    else if (p[4] && p[6] && !p[0] && !p[2] && !p[1] && !p[3] && !p[7]) sk[i] = 0;
+    else if (p[6] && p[0] && !p[2] && !p[4] && !p[1] && !p[3] && !p[5]) sk[i] = 0;
+  }
+  /* 영역 경계 픽셀(0)에서의 거리 */
+  const bd = new Int32Array(n);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = y * W + x, v = lab[i];
+    bd[i] = ((x < W - 1 && lab[i + 1] !== v) || (y < H - 1 && lab[i + W] !== v) || (x > 0 && lab[i - 1] !== v) || (y > 0 && lab[i - W] !== v)) ? 0 : 1;
+  }
+  const dB = distMap(bd, W, H);
+  const keep = new Uint8Array(n);
+  /* 그림 가장자리 3픽셀 안은 테두리 선이 대신한다 */
+  for (let y = 3; y < H - 3; y++) for (let x = 3; x < W - 3; x++) { const i = y * W + x; if (sk[i] && bd[i] && dB[i] > 2.5) keep[i] = 1; }
+  const D8 = [[0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1]];
+  const deg = new Uint8Array(n);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = y * W + x;
+    if (!keep[i]) continue;
+    let d = 0;
+    for (const [dx, dy] of D8) { const xx = x + dx, yy = y + dy; if (xx >= 0 && yy >= 0 && xx < W && yy < H && keep[yy * W + xx]) d++; }
+    deg[i] = d;
+  }
+  const vis = new Uint8Array(n);   /* 방향별로 이미 간 길(8비트) */
+  const nextDir = i => {
+    const jx = i % W, jy = (i / W) | 0;
+    for (let k = 0; k < 8; k++) {
+      if (vis[i] & (1 << k)) continue;
+      const xx = jx + D8[k][0], yy = jy + D8[k][1];
+      if (xx >= 0 && yy >= 0 && xx < W && yy < H && keep[yy * W + xx]) return k;
+    }
+    return -1;
+  };
+  const walk = (s, dir) => {
+    const pts = [s % W + 0.5, ((s / W) | 0) + 0.5];
+    let i = s, d = dir;
+    for (let guard = 0; guard < n; guard++) {
+      const x = i % W, y = (i / W) | 0, j = (y + D8[d][1]) * W + x + D8[d][0];
+      vis[i] |= 1 << d; vis[j] |= 1 << ((d + 4) % 8);
+      pts.push(j % W + 0.5, ((j / W) | 0) + 0.5);
+      i = j;
+      if (deg[i] !== 2 || i === s) break;
+      d = nextDir(i);
+      if (d < 0) break;
+    }
+    return pts;
+  };
+  const out = [];
+  const startFrom = i => { for (let k = nextDir(i); k >= 0; k = nextDir(i)) { const q = walk(i, k); q.s = i; out.push(q); } };
+  for (let i = 0; i < n; i++) if (keep[i] && deg[i] !== 2) startFrom(i);
+  for (let i = 0; i < n; i++) if (keep[i] && deg[i] === 2 && !vis[i]) startFrom(i);
+  /* 끝이 경계에서 4픽셀 안이면 가장 가까운 경계 픽셀까지 늘인다 — 입선이 코에 붙어 있게 */
+  const snap = (px, py) => {
+    const cx = Math.floor(px), cy = Math.floor(py);
+    let best = null, bdist = 1e9;
+    for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) {
+      const xx = cx + dx, yy = cy + dy;
+      if (xx < 0 || yy < 0 || xx >= W || yy >= H || bd[yy * W + xx]) continue;
+      const dd = dx * dx + dy * dy;
+      if (dd < bdist) { bdist = dd; best = [xx + 0.5, yy + 0.5]; }
+    }
+    return best;
+  };
+  const res = [];
+  for (const q0 of out) {
+    const m = q0.length / 2;
+    if (m < 2) continue;
+    /* 짧은 곁가지(한쪽 끝이 막다른 점)는 세선화 부스러기라 버린다 */
+    const e = Math.floor(q0[2 * m - 1]) * W + Math.floor(q0[2 * m - 2]);
+    if (m < 5 && (deg[q0.s] <= 1 || deg[e] <= 1)) continue;
+    const closed = m > 8 && Math.abs(q0[0] - q0[2 * m - 2]) < 1.5 && Math.abs(q0[1] - q0[2 * m - 1]) < 1.5;
+    const a = closed ? null : snap(q0[0], q0[1]), b = closed ? null : snap(q0[2 * m - 2], q0[2 * m - 1]);
+    /* 어디에도 안 붙은 짧은 토막(12픽셀 미만)은 잡티 */
+    if (!closed && !a && !b) { let len = 0; for (let i = 2; i < q0.length; i += 2) len += Math.hypot(q0[i] - q0[i - 2], q0[i + 1] - q0[i - 1]); if (len < 12) continue; }
+    const q = (a || []).concat(q0, b || []);
+    res.push({ p: simplify(smoothPts(q, closed, smooth), closed, 0.22), closed });
+  }
+  return res;
+}
+
+/* ══ 경계선 따라가기 ══
+   픽셀 모서리 격자((W+1)×(H+1))에서, 서로 다른 영역 사이에 놓인 변만 모은다(그림 가장자리 변은 빼고 테두리로 따로 그린다).
+   변이 셋 이상 모이는 점·가장자리에 닿는 점에서 끊어 선 조각으로 만들고, 남은 것은 닫힌 고리.
+   조각마다 가우스로 펴서(끝점은 고정 → 갈림길에서 선이 그대로 만난다) 점 수를 줄인다 */
+function traceChains(lab, W, H, smooth) {
+  const W1 = W + 1;
+  const hB = new Uint8Array((H + 1) * W), vB = new Uint8Array(H * W1);
+  for (let y = 1; y < H; y++) for (let x = 0; x < W; x++) if (lab[(y - 1) * W + x] !== lab[y * W + x]) hB[y * W + x] = 1;
+  for (let y = 0; y < H; y++) for (let x = 1; x < W; x++) if (lab[y * W + x - 1] !== lab[y * W + x]) vB[y * W1 + x] = 1;
+  const deg = new Uint8Array((H + 1) * W1);
+  for (let y = 0; y <= H; y++) for (let x = 0; x < W; x++) if (hB[y * W + x]) { deg[y * W1 + x]++; deg[y * W1 + x + 1]++; }
+  for (let y = 0; y < H; y++) for (let x = 0; x <= W; x++) if (vB[y * W1 + x]) { deg[y * W1 + x]++; deg[(y + 1) * W1 + x]++; }
+  /* 점 (x,y) 에서 아직 안 간 경계 변 하나를 골라 그 변의 반대 끝을 돌려준다 */
+  const step = (x, y) => {
+    if (x < W && hB[y * W + x] === 1) { hB[y * W + x] = 2; return [x + 1, y]; }
+    if (x > 0 && hB[y * W + x - 1] === 1) { hB[y * W + x - 1] = 2; return [x - 1, y]; }
+    if (y < H && vB[y * W1 + x] === 1) { vB[y * W1 + x] = 2; return [x, y + 1]; }
+    if (y > 0 && vB[(y - 1) * W1 + x] === 1) { vB[(y - 1) * W1 + x] = 2; return [x, y - 1]; }
+    return null;
+  };
+  const raw = [];
+  const walk = (x, y, closed) => {
+    const pts = [x, y];
+    let p = step(x, y);
+    while (p) {
+      pts.push(p[0], p[1]);
+      const c = p[1] * W1 + p[0];
+      if ((!closed && deg[c] !== 2) || (closed && p[0] === x && p[1] === y)) break;
+      p = step(p[0], p[1]);
+    }
+    return pts;
+  };
+  for (let y = 0; y <= H; y++) for (let x = 0; x <= W; x++) {
+    const c = y * W1 + x;
+    if (deg[c] === 0 || deg[c] === 2) continue;
+    for (let k = 0; k < 4; k++) {
+      const s = walk(x, y, false);
+      if (s.length < 4) break;
+      raw.push({ p: s, closed: false });
+    }
+  }
+  for (let y = 0; y <= H; y++) for (let x = 0; x < W; x++) if (hB[y * W + x] === 1) raw.push({ p: walk(x, y, true), closed: true });
+  for (let y = 0; y < H; y++) for (let x = 0; x <= W; x++) if (vB[y * W1 + x] === 1) raw.push({ p: walk(x, y, true), closed: true });
+  return raw.map(ch => ({ p: simplify(smoothPts(ch.p, ch.closed, smooth), ch.closed, 0.22), closed: ch.closed }));
+}
+function smoothPts(p, closed, sg) {
+  let m = p.length / 2;
+  if (closed && m > 1 && p[0] === p[2 * m - 2] && p[1] === p[2 * m - 1]) m--;
+  if (m < 3 || sg <= 0) return Float32Array.from(p.slice(0, m * 2));
+  const R = Math.ceil(sg * 2), w = [];
+  for (let k = -R; k <= R; k++) w.push(Math.exp(-(k * k) / (2 * sg * sg)));
+  const out = new Float32Array(m * 2);
+  for (let i = 0; i < m; i++) {
+    let r = R;
+    if (!closed) r = Math.min(R, i, m - 1 - i);
+    let sx = 0, sy = 0, sw = 0;
+    for (let k = -r; k <= r; k++) {
+      let j = i + k;
+      if (closed) j = ((j % m) + m) % m;
+      const ww = w[k + R];
+      sx += p[2 * j] * ww; sy += p[2 * j + 1] * ww; sw += ww;
+    }
+    out[2 * i] = sx / sw; out[2 * i + 1] = sy / sw;
+  }
+  return out;
+}
+/* 더글러스-포이커 — 곧은 구간의 점을 줄인다(닫힌 고리는 가장 먼 두 점으로 반을 갈라서) */
+function simplify(p, closed, eps) {
+  const m = p.length / 2;
+  if (m < 4) return p;
+  const keep = new Uint8Array(m);
+  const rec = (a, b) => {
+    const ax = p[2 * a], ay = p[2 * a + 1], bx = p[2 * b], by = p[2 * b + 1];
+    const dx = bx - ax, dy = by - ay, L = Math.hypot(dx, dy) || 1e-9;
+    let bi = -1, bd = eps;
+    for (let i = a + 1; i < b; i++) {
+      const d = Math.abs((p[2 * i] - ax) * dy - (p[2 * i + 1] - ay) * dx) / L;
+      if (d > bd) { bd = d; bi = i; }
+    }
+    if (bi >= 0) { keep[bi] = 1; rec(a, bi); rec(bi, b); }
+  };
+  if (closed) {
+    let far = 0, fd = -1;
+    for (let i = 1; i < m; i++) { const d = (p[2 * i] - p[0]) ** 2 + (p[2 * i + 1] - p[1]) ** 2; if (d > fd) { fd = d; far = i; } }
+    keep[0] = keep[far] = 1;
+    rec(0, far);
+    /* 뒷 반쪽 — 끝에서 처음으로 돌아오는 구간 */
+    const q = [];
+    for (let i = far; i < m; i++) q.push(i);
+    q.push(0);
+    const sub = new Float32Array(q.length * 2);
+    q.forEach((v, k) => { sub[2 * k] = p[2 * v]; sub[2 * k + 1] = p[2 * v + 1]; });
+    const kp2 = new Uint8Array(q.length);
+    const rec2 = (a, b) => {
+      const ax = sub[2 * a], ay = sub[2 * a + 1], bx = sub[2 * b], by = sub[2 * b + 1];
+      const dx = bx - ax, dy = by - ay, L = Math.hypot(dx, dy) || 1e-9;
+      let bi = -1, bd = eps;
+      for (let i = a + 1; i < b; i++) {
+        const d = Math.abs((sub[2 * i] - ax) * dy - (sub[2 * i + 1] - ay) * dx) / L;
+        if (d > bd) { bd = d; bi = i; }
+      }
+      if (bi >= 0) { kp2[bi] = 1; rec2(a, bi); rec2(bi, b); }
+    };
+    rec2(0, q.length - 1);
+    q.forEach((v, k) => { if (kp2[k]) keep[v] = 1; });
+  } else {
+    keep[0] = keep[m - 1] = 1;
+    rec(0, m - 1);
+  }
+  let c = 0;
+  for (let i = 0; i < m; i++) if (keep[i]) c++;
+  const out = new Float32Array(c * 2);
+  let j = 0;
+  for (let i = 0; i < m; i++) if (keep[i]) { out[j++] = p[2 * i]; out[j++] = p[2 * i + 1]; }
+  return out;
+}
+
+/* ══ 예시 그림 ══ 저작권 걱정 없게 코드로 직접 그린다(600×600 기준).
+   dog  — 검은 윤곽선이 있는 캐릭터 그림(진한 선 살리기 시험)
+   house — 그러데이션·잡티가 있는 사진 같은 풍경
+   garden — 크고 작은 꽃이 많은 꽃밭(세밀함 차이가 잘 보인다)
+   fruit — 명암이 있는 과일 사진 느낌 */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function drawSample(key, cv) {
+  const w = cv.width, h = cv.height, x = cv.getContext('2d');
+  x.save();
+  x.scale(w / 600, h / (key === 'house' || key === 'garden' ? 450 : 600));
+  const rg = (x0, y0, r0, x1, y1, r1, stops) => { const g = x.createRadialGradient(x0, y0, r0, x1, y1, r1); stops.forEach(s => g.addColorStop(s[0], s[1])); return g; };
+  const lg = (x0, y0, x1, y1, stops) => { const g = x.createLinearGradient(x0, y0, x1, y1); stops.forEach(s => g.addColorStop(s[0], s[1])); return g; };
+  const ell = (cx, cy, rx, ry, a) => { x.beginPath(); x.ellipse(cx, cy, rx, ry, a || 0, 0, Math.PI * 2); };
+  if (key === 'dog') {
+    x.fillStyle = '#fff8e7'; x.fillRect(0, 0, 600, 600);
+    x.lineJoin = 'round'; x.lineCap = 'round';
+    const inkW = 7, INK = '#1b1b1b';
+    const fs = (fill) => { x.fillStyle = fill; x.fill(); x.lineWidth = inkW; x.strokeStyle = INK; x.stroke(); };
+    /* 풀밭·해 */
+    x.beginPath(); x.moveTo(0, 470); x.bezierCurveTo(150, 430, 420, 500, 600, 450); x.lineTo(600, 600); x.lineTo(0, 600); x.closePath(); fs('#86efac');
+    x.beginPath(); x.arc(505, 95, 52, 0, Math.PI * 2); fs('#fde047');
+    /* 몸 */
+    ell(300, 420, 150, 95); fs('#fbbf77');
+    /* 다리 */
+    [[210, 490], [270, 505], [340, 505], [400, 490]].forEach(([a, b]) => { x.beginPath(); x.roundRect(a - 24, b - 40, 48, 70, 20); fs('#fbbf77'); });
+    /* 꼬리 */
+    x.beginPath(); x.moveTo(440, 380); x.quadraticCurveTo(520, 330, 505, 270); x.quadraticCurveTo(485, 300, 450, 340); x.closePath(); fs('#f59e0b');
+    /* 머리 */
+    ell(290, 260, 125, 110); fs('#fbbf77');
+    /* 귀 */
+    ell(175, 250, 42, 88, 0.35); fs('#b45309');
+    ell(405, 250, 42, 88, -0.35); fs('#b45309');
+    /* 주둥이 */
+    ell(290, 305, 62, 44); fs('#fff1d6');
+    /* 코 · 눈 (눈동자는 두꺼운 검정 — 영역으로 남아야 한다) */
+    ell(290, 285, 20, 13); x.fillStyle = INK; x.fill();
+    ell(245, 230, 14, 18); x.fillStyle = INK; x.fill();
+    ell(335, 230, 14, 18); x.fillStyle = INK; x.fill();
+    x.fillStyle = '#fff'; ell(250, 223, 5, 6); x.fill(); ell(340, 223, 5, 6); x.fill();
+    /* 입 */
+    x.beginPath(); x.moveTo(290, 298); x.lineTo(290, 318); x.moveTo(262, 322); x.quadraticCurveTo(290, 342, 318, 322); x.lineWidth = 6; x.strokeStyle = INK; x.stroke();
+    /* 목걸이 */
+    x.beginPath(); x.moveTo(205, 345); x.quadraticCurveTo(290, 385, 375, 345); x.lineTo(378, 362); x.quadraticCurveTo(290, 405, 202, 362); x.closePath(); fs('#ef4444');
+    ell(290, 390, 18, 18); fs('#facc15');
+    /* 꽃 */
+    [[80, 520, '#f472b6'], [540, 540, '#a78bfa']].forEach(([cx, cy, c]) => {
+      for (let i = 0; i < 5; i++) { const a = i / 5 * Math.PI * 2; ell(cx + Math.cos(a) * 20, cy + Math.sin(a) * 20, 15, 15); fs(c); }
+      ell(cx, cy, 11, 11); fs('#fde047');
+    });
+  } else if (key === 'house') {
+    x.fillStyle = lg(0, 0, 0, 300, [[0, '#60a5fa'], [1, '#dbeafe']]); x.fillRect(0, 0, 600, 450);
+    x.fillStyle = rg(480, 80, 5, 480, 80, 70, [[0, '#fffbeb'], [0.5, '#fde047'], [1, 'rgba(253,224,71,0)']]); x.fillRect(380, 0, 220, 180);
+    /* 구름 */
+    x.fillStyle = 'rgba(255,255,255,.92)';
+    [[120, 80, 38], [160, 70, 46], [205, 85, 34], [150, 98, 40]].forEach(([a, b, r]) => { x.beginPath(); x.arc(a, b, r, 0, Math.PI * 2); x.fill(); });
+    /* 언덕 */
+    x.fillStyle = lg(0, 270, 0, 450, [[0, '#4ade80'], [1, '#15803d']]);
+    x.beginPath(); x.moveTo(0, 300); x.bezierCurveTo(200, 250, 380, 330, 600, 280); x.lineTo(600, 450); x.lineTo(0, 450); x.fill();
+    /* 집 */
+    x.fillStyle = lg(0, 230, 0, 380, [[0, '#fef3c7'], [1, '#fcd34d']]); x.fillRect(250, 240, 190, 140);
+    x.fillStyle = lg(0, 150, 0, 245, [[0, '#dc2626'], [1, '#991b1b']]);
+    x.beginPath(); x.moveTo(230, 245); x.lineTo(345, 150); x.lineTo(460, 245); x.closePath(); x.fill();
+    x.fillStyle = '#7c2d12'; x.fillRect(320, 300, 45, 80);
+    x.fillStyle = lg(0, 265, 0, 310, [[0, '#bae6fd'], [1, '#38bdf8']]); x.fillRect(268, 265, 40, 38); x.fillRect(385, 265, 40, 38);
+    /* 나무 */
+    x.fillStyle = '#78350f'; x.fillRect(118, 250, 22, 110);
+    x.fillStyle = rg(115, 200, 10, 130, 215, 85, [[0, '#86efac'], [1, '#166534']]);
+    [[100, 215, 55], [160, 205, 50], [130, 170, 52], [128, 240, 48]].forEach(([a, b, r]) => { x.beginPath(); x.arc(a, b, r, 0, Math.PI * 2); x.fill(); });
+    /* 사진처럼 — 잔 잡티 */
+    const im = x.getImageData(0, 0, w, h), dd = im.data, rnd = mulberry32(7);
+    for (let i = 0; i < dd.length; i += 4) { const v = (rnd() - 0.5) * 18; dd[i] += v; dd[i + 1] += v; dd[i + 2] += v; }
+    x.putImageData(im, 0, 0);
+  } else if (key === 'garden') {
+    /* 꽃밭 — 크고 작은 꽃이 많아 세밀함에 따라 칸 수가 크게 달라진다 */
+    const rnd = mulberry32(11);
+    x.fillStyle = lg(0, 0, 0, 200, [[0, '#7dd3fc'], [1, '#e0f2fe']]); x.fillRect(0, 0, 600, 450);
+    x.fillStyle = '#a7d3a0'; x.beginPath(); x.moveTo(0, 170); x.bezierCurveTo(150, 110, 330, 150, 600, 120); x.lineTo(600, 450); x.lineTo(0, 450); x.fill();
+    x.fillStyle = lg(0, 170, 0, 450, [[0, '#65a30d'], [1, '#3f6212']]);
+    x.beginPath(); x.moveTo(0, 200); x.bezierCurveTo(200, 170, 400, 215, 600, 185); x.lineTo(600, 450); x.lineTo(0, 450); x.fill();
+    const cols = ['#f472b6', '#facc15', '#ef4444', '#a78bfa', '#ffffff', '#fb923c'];
+    const fl = [];
+    for (let i = 0; i < 46; i++) { const y = 205 + rnd() * 230; fl.push([rnd() * 600, y, (8 + (y - 200) / 230 * 26) * (0.8 + rnd() * 0.4), cols[Math.floor(rnd() * cols.length)]]); }
+    fl.sort((a, b) => a[1] - b[1]);
+    for (const [fx, fy, r, c] of fl) {
+      x.strokeStyle = '#166534'; x.lineWidth = r * 0.16; x.beginPath(); x.moveTo(fx, fy); x.lineTo(fx + r * 0.2, fy + r * 2.2); x.stroke();
+      x.fillStyle = '#15803d'; ell(fx + r * 0.6, fy + r * 1.5, r * 0.55, r * 0.22, -0.5); x.fill();
+      const np = 5 + Math.floor(rnd() * 2), rot = rnd() * 6;
+      for (let k = 0; k < np; k++) { const a = rot + k / np * Math.PI * 2; x.fillStyle = c; ell(fx + Math.cos(a) * r * 0.55, fy + Math.sin(a) * r * 0.55, r * 0.5, r * 0.32, a); x.fill(); }
+      x.fillStyle = c === '#facc15' ? '#92400e' : '#fde047'; ell(fx, fy, r * 0.28, r * 0.28); x.fill();
+    }
+    x.fillStyle = '#fff'; [[90, 60, 30], [125, 52, 38], [160, 64, 28], [420, 45, 26], [452, 38, 32]].forEach(([a, b, rr]) => { ell(a, b, rr, rr * 0.7); x.fill(); });
+    const im = x.getImageData(0, 0, w, h), dd = im.data, rn = mulberry32(5);
+    for (let i = 0; i < dd.length; i += 4) { const v = (rn() - 0.5) * 22; dd[i] += v; dd[i + 1] += v; dd[i + 2] += v; }
+    x.putImageData(im, 0, 0);
+  } else {
+    x.fillStyle = lg(0, 0, 0, 600, [[0, '#f5f5f4'], [1, '#d6d3d1']]); x.fillRect(0, 0, 600, 600);
+    x.fillStyle = 'rgba(0,0,0,.18)'; ell(300, 500, 230, 40); x.fill();
+    /* 접시 */
+    x.fillStyle = lg(0, 430, 0, 520, [[0, '#ffffff'], [1, '#e7e5e4']]); ell(300, 470, 250, 60); x.fill();
+    /* 바나나 */
+    x.fillStyle = lg(150, 250, 250, 420, [[0, '#fde047'], [1, '#eab308']]);
+    x.beginPath(); x.moveTo(90, 330); x.bezierCurveTo(120, 460, 300, 470, 380, 390); x.bezierCurveTo(300, 430, 170, 420, 120, 320); x.closePath(); x.fill();
+    x.fillStyle = '#713f12'; ell(98, 326, 12, 8, 0.6); x.fill();
+    /* 사과 */
+    x.fillStyle = rg(250, 320, 10, 290, 350, 120, [[0, '#fca5a5'], [0.35, '#ef4444'], [1, '#7f1d1d']]);
+    x.beginPath(); x.moveTo(290, 270); x.bezierCurveTo(200, 230, 150, 330, 190, 400); x.bezierCurveTo(220, 460, 270, 450, 290, 440);
+    x.bezierCurveTo(310, 450, 360, 460, 390, 400); x.bezierCurveTo(430, 330, 380, 230, 290, 270); x.fill();
+    x.fillStyle = '#57534e'; x.fillRect(284, 225, 10, 50);
+    x.fillStyle = lg(300, 220, 360, 260, [[0, '#4ade80'], [1, '#15803d']]); ell(328, 240, 36, 16, -0.4); x.fill();
+    /* 배(서양배) */
+    x.fillStyle = rg(420, 330, 10, 450, 360, 110, [[0, '#ecfccb'], [0.5, '#a3e635'], [1, '#4d7c0f']]);
+    x.beginPath(); x.moveTo(450, 250); x.bezierCurveTo(420, 250, 425, 310, 400, 340); x.bezierCurveTo(360, 390, 390, 460, 450, 460);
+    x.bezierCurveTo(510, 460, 540, 390, 500, 340); x.bezierCurveTo(475, 310, 480, 250, 450, 250); x.fill();
+    x.fillStyle = '#57534e'; x.fillRect(446, 222, 8, 32);
+    const im = x.getImageData(0, 0, w, h), dd = im.data, rnd = mulberry32(3);
+    for (let i = 0; i < dd.length; i += 4) { const v = (rnd() - 0.5) * 14; dd[i] += v; dd[i + 1] += v; dd[i + 2] += v; }
+    x.putImageData(im, 0, 0);
+  }
+  x.restore();
+}
+const SAMPLES = [['dog', '강아지 그림', 600, 600], ['house', '집 풍경', 600, 450], ['garden', '꽃밭 사진', 600, 450], ['fruit', '과일 사진', 600, 600]];
+
+/* ══ 만다라 무늬 ══ 번호(seed) 하나로 늘 같은 무늬가 나온다.
+   반지름 1 원 안(y 아래로)에 띠를 여러 겹 두고, 띠마다 꽃잎·잎·아치·물방울·점·마름모·톱니 가운데 하나를
+   대칭 수만큼 돌려 놓는다. 모양은 「반지름 방향 u(0→1) 에 따른 반폭 h(u)」 로 정의해 극좌표로 옮긴다 —
+   곡선이 원을 따라 휘어서 띠에 꼭 맞는다. 결과는 닫힌 선(폴리라인) 목록 → 캔버스·PDF 가 같은 것을 그린다 */
+const PROFILES = {
+  round: u => Math.sqrt(Math.max(0, 1 - u * u)),                          /* 끝이 둥근 꽃잎 */
+  point: u => Math.pow(1 - u, 0.9) * (1 + 0.9 * u) / (1 + 0.9 * 0.35),     /* 끝이 뾰족한 꽃잎 */
+  leaf: u => Math.sin(Math.PI * u) * 0.95,                               /* 양끝 뾰족한 잎 */
+  drop: u => Math.sin(Math.PI * Math.pow(u, 0.62)) * 0.9,                /* 물방울(안쪽이 둥글다) */
+  bell: u => Math.pow(Math.max(0, 1 - u * u * u), 0.5)                   /* 종 모양 아치 */
+};
+function mandala(seed, sym, rings, style) {
+  const rnd = mulberry32(seed * 7919 + 13);
+  const pick = a => a[Math.floor(rnd() * a.length)];
+  const out = [];   /* { p: [x,y,...], closed } */
+  const P = (r, t) => [r * Math.cos(t - Math.PI / 2), r * Math.sin(t - Math.PI / 2)];
+  const circle = (r, cx, cy) => {
+    const n = Math.max(24, Math.min(160, Math.round(r * 260))), p = [];
+    for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; p.push((cx || 0) + r * Math.cos(a), (cy || 0) + r * Math.sin(a)); }
+    out.push({ p, closed: true });
+  };
+  /* 반폭 함수 모양 하나: 띠 [a,b] · 가운데 각 th · 최대 반폭 각 w */
+  const shape = (prof, a, b, th, w) => {
+    /* 끝(u=1) 쪽이 급하게 꺾이는 모양이 많아 그쪽을 촘촘히 찍는다 */
+    const N = 30, p = [], U = i => Math.sin(i / N * Math.PI / 2);
+    for (let i = 0; i <= N; i++) { const u = U(i), q = P(a + (b - a) * u, th - PROFILES[prof](u) * w); p.push(q[0], q[1]); }
+    for (let i = N - 1; i >= 1; i--) { const u = U(i), q = P(a + (b - a) * u, th + PROFILES[prof](u) * w); p.push(q[0], q[1]); }
+    out.push({ p, closed: true });
+  };
+  const line = (r1, r2, th) => { const a = P(r1, th), b = P(r2, th); out.push({ p: [a[0], a[1], b[0], b[1]], closed: false }); };
+  const dot = (r, th, rr) => { const c = P(r, th); circle(rr, c[0], c[1]); };
+
+  /* 띠 나누기 — 가운데 원 + rings 겹. 바깥으로 갈수록 조금씩 넓게 */
+  const rc = 0.1 + rnd() * 0.05;
+  const ws = [];
+  for (let i = 0; i < rings; i++) ws.push((0.75 + rnd() * 0.5) * (1 + i * 0.12));
+  const tot = ws.reduce((s, v) => s + v, 0), R = [rc];
+  for (let i = 0; i < rings; i++) R.push(R[i] + ws[i] / tot * (0.985 - rc));
+
+  const roundish = ['petal', 'arch', 'dots', 'drop', 'double'];
+  const sharpish = ['spike', 'leaf', 'zigzag', 'diamond', 'double'];
+  const all = ['petal', 'spike', 'leaf', 'arch', 'dots', 'drop', 'zigzag', 'diamond', 'double'];
+  const pool = style === 'round' ? roundish : style === 'sharp' ? sharpish : all;
+
+  /* 가운데 — 작은 꽃 또는 겹원 */
+  circle(rc);
+  if (rnd() < 0.6) {
+    const m = Math.max(5, Math.round(sym / 2)), w = Math.PI / m * 0.9;
+    for (let k = 0; k < m; k++) shape(style === 'sharp' ? 'point' : 'round', rc * 0.28, rc * 0.92, k / m * Math.PI * 2, w);
+    circle(rc * 0.28);
+  } else { circle(rc * 0.62); circle(rc * 0.3); }
+
+  let prev = '';
+  for (let i = 0; i < rings; i++) {
+    const a = R[i], b = R[i + 1], last = i === rings - 1;
+    let motif = pick(pool);
+    for (let t = 0; t < 4 && motif === prev; t++) motif = pick(pool);
+    if (last && (motif === 'dots' || motif === 'zigzag')) motif = style === 'sharp' ? 'spike' : 'arch';
+    prev = motif;
+    /* 안쪽 띠는 대칭 수 그대로, 넓은 바깥 띠는 두 배로 촘촘히 */
+    const m = (b * Math.PI * 2 / sym > 0.5 && rnd() < 0.55) ? sym * 2 : sym;
+    const off = (i % 2 && rnd() < 0.6) ? Math.PI / m : 0;
+    const step = Math.PI * 2 / m, w = step / 2;
+    if (!last || rnd() < 0.5) circle(b);
+    for (let k = 0; k < m; k++) {
+      const th = off + k * step;
+      if (motif === 'petal') {
+        shape('round', a, b, th, w * 0.96);
+        if (rnd() < 0.8 || k) shape('round', a, a + (b - a) * 0.6, th, w * 0.5);
+      } else if (motif === 'spike') {
+        shape('point', a, b, th, w * 0.96);
+        line(a + (b - a) * 0.12, a + (b - a) * 0.68, th);
+      } else if (motif === 'leaf') {
+        shape('leaf', a + (b - a) * 0.04, b - (b - a) * 0.02, th, w * 0.85);
+        shape('leaf', a + (b - a) * 0.25, a + (b - a) * 0.75, th, w * 0.35);
+      } else if (motif === 'arch') {
+        shape('bell', a, b, th, w);
+        shape('bell', a, a + (b - a) * 0.58, th, w * 0.56);
+        dot(a + (b - a) * 0.8, th, Math.min((b - a) * 0.07, w * a * 0.3 + 0.004));
+      } else if (motif === 'drop') {
+        shape('drop', a + (b - a) * 0.06, b - (b - a) * 0.03, th, w * 0.8);
+        dot(a + (b - a) * 0.32, th, Math.min((b - a) * 0.1, a * w * 0.28 + 0.003));
+        if (m <= sym) dot(a + (b - a) * 0.72, th + w, Math.min((b - a) * 0.08, b * w * 0.25));
+      } else if (motif === 'dots') {
+        const rm = (a + b) / 2, rr = Math.min((b - a) * 0.36, rm * Math.sin(w) * 0.8);
+        dot(rm, th, rr);
+        dot(rm, th, rr * 0.45);
+        if (rnd() < 0.7) dot(rm, th + w, rr * 0.35);
+      } else if (motif === 'zigzag') {
+        const p1 = P(a, th), p2 = P(b, th + w), p3 = P(a, th + step);
+        out.push({ p: [p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]], closed: false });
+        const q1 = P(a + (b - a) * 0.3, th + w * 0.55), q2 = P(b - (b - a) * 0.25, th + w), q3 = P(a + (b - a) * 0.3, th + w * 1.45);
+        out.push({ p: [q1[0], q1[1], q2[0], q2[1], q3[0], q3[1]], closed: true });
+      } else if (motif === 'diamond') {
+        const mid = (a + b) / 2, q = [P(a, th), P(mid, th + w * 0.98), P(b, th), P(mid, th - w * 0.98)];
+        out.push({ p: q.flat(), closed: true });
+        const e = 0.45, qq = [P(mid - (mid - a) * e, th), P(mid, th + w * e), P(mid + (b - mid) * e, th), P(mid, th - w * e)];
+        out.push({ p: qq.flat(), closed: true });
+      } else {   /* double — 큰 꽃잎 뒤로 작은 꽃잎이 엇갈려 비친다 */
+        shape(style === 'sharp' ? 'point' : 'round', a, b, th, w * 0.8);
+        shape('leaf', a, a + (b - a) * 0.72, th + w, w * 0.45);
+      }
+    }
+  }
+  return out;
+}
+
+/* ══ 쪽 짜기 ══ 한 쪽 = mm 좌표(왼쪽 위 원점)의 그리기 목록.
+   같은 목록을 캔버스(미리보기·PNG)와 PDF 가 그대로 그린다 → 보이는 것 = 인쇄되는 것 */
+const FONT = '-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Roboto,sans-serif';
+const INK = '#1c1917', MUTED = '#78716c', NUMC = '#8b8580';
+const LWMM = { s: 0.3, m: 0.5, l: 0.85 };
+const MARGIN = 12;
+
+function paperFor(aspect) {
+  const land = opt.paper === 'l' || (opt.paper === 'auto' && aspect > 1.12);
+  return land ? { W: 297, H: 210 } : { W: 210, H: 297 };
+}
+function headH() { return opt.head === 'name' ? 13 : opt.head === 'title' ? (opt.title.trim() ? 16 : 0) : 0; }
+/* 같은 쪽 색 안내 줄 수 */
+function legendGrid(K, W) {
+  const cols = Math.max(1, Math.floor((W - MARGIN * 2) / 31));
+  return { cols, rows: Math.ceil(K / cols), h: Math.ceil(K / cols) * 8 + 8 };
+}
+/* 그림이 들어갈 네모 */
+function boxFor(aspect, K) {
+  const pp = paperFor(aspect), hh = headH();
+  const legH = opt.mode === 'pbn' && opt.legend === 'same' && K ? legendGrid(K, pp.W).h + 3 : 0;
+  const ax = MARGIN, ay = MARGIN + hh, aw = pp.W - MARGIN * 2, ah = pp.H - MARGIN * 2 - hh - legH;
+  let bw = aw, bh = aw / aspect;
+  if (bh > ah) { bh = ah; bw = ah * aspect; }
+  return { W: pp.W, H: pp.H, x: ax + (aw - bw) / 2, y: ay + (ah - bh) / 2, w: bw, h: bh, legY: pp.H - MARGIN - legH + 3, legH };
+}
+
+/* 머리 칸 */
+function headItems(it, W) {
+  if (opt.head === 'name') {
+    const y = MARGIN + 7;
+    it.push({ t: 'text', s: '이름', x: MARGIN, y, sz: 4.2, b: true, c: INK });
+    it.push({ t: 'line', x1: MARGIN + 11, y1: y + 1, x2: W / 2 - 6, y2: y + 1, lw: 0.3, c: '#a8a29e' });
+    it.push({ t: 'text', s: '날짜', x: W / 2 + 6, y, sz: 4.2, b: true, c: INK });
+    it.push({ t: 'line', x1: W / 2 + 17, y1: y + 1, x2: W - MARGIN, y2: y + 1, lw: 0.3, c: '#a8a29e' });
+  } else if (opt.head === 'title' && opt.title.trim()) {
+    it.push({ t: 'text', s: opt.title.trim(), x: W / 2, y: MARGIN + 8, sz: 6.4, b: true, c: INK, a: 'c' });
+  }
+}
+
+/* 숫자 크기 — 칸 안쪽 가장 넓은 곳(반지름 r mm)에 들어가게, 두 자리면 조금 작게 */
+function numSize(rmm, digits) {
+  const byW = (2 * rmm * 0.82) / (0.58 * digits + 0.1);
+  return Math.round(clamp(Math.min(rmm * 1.15, byW), 1.8, 4.6) * 10) / 10;
+}
+
+/* 사진 쪽 하나 */
+function photoPage(pg, res, view) {
+  const aspect = res.W / res.H, K = res.pal.length;
+  const B = boxFor(aspect, K), s = B.w / res.W, lw = LWMM[opt.lw];
+  const it = [];
+  headItems(it, B.W);
+  if (view === 'orig') it.push({ t: 'img', cv: pageSrc(pg), x: B.x, y: B.y, w: B.w, h: B.h });
+  else if (view === 'color') it.push({ t: 'fill', res, x: B.x, y: B.y, w: B.w, h: B.h, pbn: opt.mode === 'pbn' });
+  if (view !== 'orig') {
+    it.push({ t: 'chains', chains: res.chains, ox: B.x, oy: B.y, s, lw, c: INK });
+    if (opt.frame) it.push({ t: 'rect', x: B.x, y: B.y, w: B.w, h: B.h, lw, c: INK });
+  } else it.push({ t: 'rect', x: B.x, y: B.y, w: B.w, h: B.h, lw: 0.2, c: '#a8a29e' });
+  if (opt.mode === 'pbn' && view === 'page') {
+    for (const L of res.labels) {
+      const t = String(L.c + 1), sz = numSize(L.r * s, t.length);
+      it.push({ t: 'text', s: t, x: B.x + L.x * s, y: B.y + L.y * s + sz * 0.36, sz, b: false, c: NUMC, a: 'c' });
+    }
+  }
+  if (opt.mode === 'pbn' && opt.legend === 'same' && view !== 'orig') legendStrip(it, res.pal, B);
+  return { W: B.W, H: B.H, it };
+}
+/* 같은 쪽 아래 색 안내 */
+function legendStrip(it, pal, B) {
+  const g = legendGrid(pal.length, B.W), cw = (B.W - MARGIN * 2) / g.cols, y0 = B.legY;
+  it.push({ t: 'line', x1: MARGIN, y1: y0, x2: B.W - MARGIN, y2: y0, lw: 0.2, c: '#d6d3d1' });
+  it.push({ t: 'text', s: '색 안내 — 칸 안의 번호와 같은 색으로 칠하세요', x: MARGIN, y: y0 + 4.4, sz: 2.6, c: MUTED });
+  pal.forEach((p, i) => {
+    const x = MARGIN + (i % g.cols) * cw, y = y0 + 7 + Math.floor(i / g.cols) * 8;
+    it.push({ t: 'circle', cx: x + 3, cy: y + 3.2, r: 2.9, fill: p.hex, lw: 0.2, c: '#a8a29e' });
+    it.push({ t: 'text', s: String(i + 1), x: x + 3, y: y + 4.35, sz: 3.1, b: true, c: inkOn(p.hex), a: 'c' });
+    it.push({ t: 'text', s: fitText(p.name, cw - 8.5, 2.5), x: x + 7.3, y: y + 4.1, sz: 2.5, c: INK });
+  });
+}
+function fitText(s, wmm, sz) {
+  if (textW(s, sz, false) <= wmm) return s;
+  while (s.length > 1 && textW(s + '…', sz, false) > wmm) s = s.slice(0, -1);
+  return s + '…';
+}
+/* 따로 한 쪽 — 큰 색 견본 + 완성 그림 */
+function legendPage(res, idx) {
+  const W = 210, H = 297, it = [], pal = res.pal;
+  it.push({ t: 'text', s: '색 안내' + (idx ? ' · ' + idx + '번 그림' : ''), x: MARGIN, y: MARGIN + 7, sz: 6, b: true, c: INK });
+  it.push({ t: 'text', s: '번호와 같은 색으로 칠하세요. 색 이름·색 코드는 비슷한 물감·색연필을 고르는 길잡이입니다.', x: MARGIN, y: MARGIN + 14, sz: 2.8, c: MUTED });
+  const cols = pal.length > 16 ? 3 : 2, cw = (W - MARGIN * 2) / cols, rh = pal.length > 24 ? 9.5 : 12;
+  const rows = Math.ceil(pal.length / cols);
+  pal.forEach((p, i) => {
+    const x = MARGIN + Math.floor(i / rows) * cw, y = MARGIN + 20 + (i % rows) * rh, sq = rh - 2.5;
+    it.push({ t: 'rect', x, y, w: sq, h: sq, fill: p.hex, lw: 0.2, c: '#a8a29e' });
+    it.push({ t: 'text', s: String(i + 1), x: x + sq / 2, y: y + sq / 2 + 1.5, sz: 4, b: true, c: inkOn(p.hex), a: 'c' });
+    it.push({ t: 'text', s: fitText(p.name, cw - sq - 6, 3.2), x: x + sq + 3, y: y + sq / 2 - 0.2, sz: 3.2, b: true, c: INK });
+    it.push({ t: 'text', s: p.hex.toUpperCase() + ' · ' + p.regions + '칸', x: x + sq + 3, y: y + sq / 2 + 3.6, sz: 2.5, c: MUTED });
+  });
+  const top = MARGIN + 20 + rows * rh + 8;
+  it.push({ t: 'text', s: '완성 그림', x: MARGIN, y: top, sz: 4, b: true, c: INK });
+  const aw = W - MARGIN * 2, ah = H - MARGIN - top - 4, asp = res.W / res.H;
+  let bw = aw, bh = aw / asp;
+  if (bh > ah) { bh = ah; bw = ah * asp; }
+  const bx = (W - bw) / 2, by = top + 4;
+  it.push({ t: 'fill', res, x: bx, y: by, w: bw, h: bh, pbn: true });
+  it.push({ t: 'chains', chains: res.chains, ox: bx, oy: by, s: bw / res.W, lw: 0.25, c: '#44403c' });
+  it.push({ t: 'rect', x: bx, y: by, w: bw, h: bh, lw: 0.25, c: '#44403c' });
+  return { W, H, it };
+}
+/* 만다라 쪽 */
+function mandalaPage(mp) {
+  const pp = paperFor(1), hh = headH(), lw = LWMM[opt.lw], it = [];
+  headItems(it, pp.W);
+  const aw = pp.W - MARGIN * 2, ah = pp.H - MARGIN * 2 - hh, R = Math.min(aw, ah) / 2 - lw;
+  const cx = pp.W / 2, cy = MARGIN + hh + ah / 2;
+  if (!mp.sh) mp.sh = mandala(mp.seed, opt.sym, opt.rings, opt.mstyle);
+  it.push({ t: 'chains', chains: mp.sh, ox: cx, oy: cy, s: R, lw, c: INK });
+  if (opt.frame) it.push({ t: 'rect', x: MARGIN, y: MARGIN + hh, w: aw, h: ah, lw, c: INK });
+  return { W: pp.W, H: pp.H, it };
+}
+
+/* ── 색칠 예시 그림 — 영역을 색으로 채우고(작업 크기의 2배로 늘려 계단을 줄인다) ── */
+const fillCache = new WeakMap();
+function fillCanvas(res, pbn) {
+  let m = fillCache.get(res);
+  if (!m) { m = {}; fillCache.set(res, m); }
+  const k = pbn ? 'p' : 'r';
+  if (m[k]) return m[k];
+  const cv = makeCanvas(res.W, res.H), x = cv.getContext('2d'), im = x.createImageData(res.W, res.H), d = im.data;
+  const cols = [];
+  for (let r = 0; r < res.n; r++) cols.push(hex2rgb(pbn ? res.pal[res.col[r]].hex : res.rmean[r]));
+  for (let i = 0; i < res.W * res.H; i++) { const c = cols[res.lab[i]]; d[i * 4] = c[0]; d[i * 4 + 1] = c[1]; d[i * 4 + 2] = c[2]; d[i * 4 + 3] = 255; }
+  x.putImageData(im, 0, 0);
+  return (m[k] = cv);
+}
+
+/* ══ 캔버스에 그리기 ══ k = mm 당 픽셀 */
+function drawPage(ctx, spec, k) {
+  ctx.save();
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, spec.W * k, spec.H * k);
+  ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+  for (const o of spec.it) {
+    if (o.t === 'chains') {
+      ctx.strokeStyle = o.c; ctx.lineWidth = Math.max(0.6, o.lw * k);
+      ctx.beginPath();
+      const S = o.s * k, X0 = o.ox * k, Y0 = o.oy * k;
+      for (const ch of o.chains) {
+        const p = ch.p;
+        ctx.moveTo(X0 + p[0] * S, Y0 + p[1] * S);
+        for (let i = 2; i < p.length; i += 2) ctx.lineTo(X0 + p[i] * S, Y0 + p[i + 1] * S);
+        if (ch.closed) ctx.closePath();
+      }
+      ctx.stroke();
+    } else if (o.t === 'rect') {
+      if (o.fill) { ctx.fillStyle = o.fill; ctx.fillRect(o.x * k, o.y * k, o.w * k, o.h * k); }
+      if (o.lw) { ctx.strokeStyle = o.c; ctx.lineWidth = Math.max(0.6, o.lw * k); ctx.strokeRect(o.x * k, o.y * k, o.w * k, o.h * k); }
+    } else if (o.t === 'circle') {
+      ctx.beginPath(); ctx.arc(o.cx * k, o.cy * k, o.r * k, 0, Math.PI * 2);
+      if (o.fill) { ctx.fillStyle = o.fill; ctx.fill(); }
+      if (o.lw) { ctx.strokeStyle = o.c; ctx.lineWidth = Math.max(0.6, o.lw * k); ctx.stroke(); }
+    } else if (o.t === 'line') {
+      ctx.strokeStyle = o.c; ctx.lineWidth = Math.max(0.6, o.lw * k);
+      ctx.beginPath(); ctx.moveTo(o.x1 * k, o.y1 * k); ctx.lineTo(o.x2 * k, o.y2 * k); ctx.stroke();
+    } else if (o.t === 'text') {
+      ctx.fillStyle = o.c; ctx.font = fontStr(o.sz * k, o.b);
+      ctx.textAlign = o.a === 'c' ? 'center' : o.a === 'r' ? 'right' : 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(o.s, o.x * k, o.y * k);
+    } else if (o.t === 'img') {
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(o.cv, o.x * k, o.y * k, o.w * k, o.h * k);
+    } else if (o.t === 'fill') {
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(fillCanvas(o.res, o.pbn), o.x * k, o.y * k, o.w * k, o.h * k);
+      ctx.imageSmoothingEnabled = true;
+    }
+  }
+  ctx.restore();
+}
+
+/* ══ PDF ══ 선은 벡터, 글자는 기기 글꼴로 그린 투명 그림 조각(한글 글꼴을 싣지 않아도 어디서나 같게),
+   색칠 예시는 RGB 그림 한 장 */
+const te8 = new TextEncoder();
+async function zlib(u8) {
+  if (typeof CompressionStream === 'undefined') return null;
+  try {
+    const st = new Blob([u8]).stream().pipeThrough(new CompressionStream('deflate'));
+    return new Uint8Array(await new Response(st).arrayBuffer());
+  } catch (e) { return null; }
+}
+function catU8(arrs) {
+  let n = 0; for (const a of arrs) n += a.length;
+  const out = new Uint8Array(n); let o = 0;
+  for (const a of arrs) { out.set(a, o); o += a.length; }
+  return out;
+}
+class PdfW {
+  constructor() { this.o = []; }
+  alloc() { this.o.push(null); return this.o.length; }
+  put(n, s) { this.o[n - 1] = te8.encode(s); }
+  async stream(n, dict, data) {
+    const u = typeof data === 'string' ? te8.encode(data) : data;
+    let body = u, filt = '';
+    if (u.length > 80) { const z = await zlib(u); if (z && z.length < u.length) { body = z; filt = ' /Filter /FlateDecode'; } }
+    this.o[n - 1] = catU8([te8.encode('<< ' + dict + filt + ' /Length ' + body.length + ' >>\nstream\n'), body, te8.encode('\nendstream')]);
+  }
+  blob(root, info) {
+    const head = catU8([te8.encode('%PDF-1.5\n'), new Uint8Array([37, 226, 227, 207, 211, 10])]);
+    const parts = [head], offs = [];
+    let len = head.length;
+    this.o.forEach((b, i) => {
+      offs[i] = len;
+      const h = te8.encode((i + 1) + ' 0 obj\n'), t = te8.encode('\nendobj\n');
+      parts.push(h, b, t); len += h.length + b.length + t.length;
+    });
+    let x = 'xref\n0 ' + (this.o.length + 1) + '\n0000000000 65535 f \n';
+    for (const off of offs) x += String(off).padStart(10, '0') + ' 00000 n \n';
+    x += 'trailer\n<< /Size ' + (this.o.length + 1) + ' /Root ' + root + ' 0 R /Info ' + info + ' 0 R >>\nstartxref\n' + len + '\n%%EOF\n';
+    parts.push(te8.encode(x));
+    return new Blob(parts, { type: 'application/pdf' });
+  }
+}
+const nf = v => { const x = Math.round(v * 100) / 100; return String(x === 0 ? 0 : x); };
+function rgbS(h) { const [r, g, b] = hex2rgb(h); return (r / 255).toFixed(3) + ' ' + (g / 255).toFixed(3) + ' ' + (b / 255).toFixed(3); }
+function pdfStr(s) {
+  let h = 'FEFF';
+  for (const ch of s) {
+    const c = ch.codePointAt(0);
+    if (c > 0xffff) { const v = c - 0x10000; h += (0xd800 + (v >> 10)).toString(16).padStart(4, '0') + (0xdc00 + (v & 1023)).toString(16).padStart(4, '0'); }
+    else h += c.toString(16).padStart(4, '0');
+  }
+  return '<' + h.toUpperCase() + '>';
+}
+const mctx = document.createElement('canvas').getContext('2d');
+const wCache = new Map();
+function fontStr(px, b) { return (b ? '700 ' : '400 ') + px + 'px ' + FONT; }
+function textW(s, sz, b) {
+  const k = (b ? 1 : 0) + '|' + s;
+  let w = wCache.get(k);
+  if (w == null) { mctx.font = fontStr(100, b); w = mctx.measureText(s).width / 100; wCache.set(k, w); }
+  return w * sz;
+}
+const metCache = {};
+function fmet(b) {
+  const k = b ? 'b' : 'r';
+  if (metCache[k]) return metCache[k];
+  mctx.font = fontStr(100, b);
+  const m = mctx.measureText('가Hgy');
+  return (metCache[k] = { asc: (m.fontBoundingBoxAscent || 95) / 100, desc: (m.fontBoundingBoxDescent || 25) / 100 });
+}
+const tkey = p => (p.b ? 1 : 0) + '|' + p.sz.toFixed(2) + '|' + p.c + '|' + p.s;
+async function makeTiles(pdf, lists, prog) {
+  const want = new Map();
+  for (const list of lists) for (const p of list) { const k = tkey(p); if (!want.has(k)) want.set(k, p); }
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d', { willReadFrequently: true });
+  const out = new Map();
+  let i = 0;
+  for (const [k, p] of want) {
+    const m = fmet(p.b), wmm = textW(p.s, p.sz, p.b), pad = 3, asc = m.asc * p.sz * TILE_K;
+    const W = Math.max(2, Math.ceil(wmm * TILE_K) + pad * 2), H = Math.max(2, Math.ceil((m.asc + m.desc) * p.sz * TILE_K) + pad * 2);
+    cv.width = W; cv.height = H;
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = fontStr(p.sz * TILE_K, p.b); ctx.fillStyle = '#000'; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    ctx.fillText(p.s, pad, pad + asc);
+    const d = ctx.getImageData(0, 0, W, H).data, a = new Uint8Array(W * H), rgb = new Uint8Array(W * H * 3);
+    const [r, g, b] = hex2rgb(p.c);
+    for (let j = 0; j < a.length; j++) { a[j] = d[j * 4 + 3]; rgb[j * 3] = r; rgb[j * 3 + 1] = g; rgb[j * 3 + 2] = b; }
+    const sm = pdf.alloc(), im = pdf.alloc();
+    await pdf.stream(sm, '/Type /XObject /Subtype /Image /Width ' + W + ' /Height ' + H + ' /ColorSpace /DeviceGray /BitsPerComponent 8', a);
+    await pdf.stream(im, '/Type /XObject /Subtype /Image /Width ' + W + ' /Height ' + H + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /SMask ' + sm + ' 0 R', rgb);
+    out.set(k, { name: 'T' + i, n: im, W, H, wmm, offX: -pad / TILE_K, offTop: -(pad + asc) / TILE_K });
+    i++;
+    if (i % 30 === 0) { if (prog) prog('글자 ' + i + ' / ' + want.size); await sleep0(); }
+  }
+  cv.width = cv.height = 1;
+  return out;
+}
+/* RGB 그림 한 장(색칠 예시·원본) — 인쇄에 넉넉한 크기(최대 긴 변 1600px)로 */
+async function imageObj(pdf, cv) {
+  const d = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data, n = cv.width * cv.height, rgb = new Uint8Array(n * 3);
+  for (let i = 0; i < n; i++) { rgb[i * 3] = d[i * 4]; rgb[i * 3 + 1] = d[i * 4 + 1]; rgb[i * 3 + 2] = d[i * 4 + 2]; }
+  const o = pdf.alloc();
+  await pdf.stream(o, '/Type /XObject /Subtype /Image /Width ' + cv.width + ' /Height ' + cv.height + ' /ColorSpace /DeviceRGB /BitsPerComponent 8', rgb);
+  return o;
+}
+function fillForPdf(res, pbn) {
+  /* 영역 색만 넣은 그림(경계선은 그 위에 벡터로 긋는다) — 작으면 정수배로 키워 흐림을 줄인다 */
+  const k = Math.max(1, Math.min(3, Math.floor(1600 / Math.max(res.W, res.H)))), cv = makeCanvas(res.W * k, res.H * k), x = cv.getContext('2d');
+  x.imageSmoothingEnabled = false;
+  x.drawImage(fillCanvas(res, pbn), 0, 0, cv.width, cv.height);
+  return cv;
+}
+async function pageOps(pdf, spec, tiles, used, imgs) {
+  const PH = spec.H, X = v => nf(v * PT), Y = v => nf((PH - v) * PT);
+  let o = '1 J 1 j\n';
+  for (const it of spec.it) {
+    if (it.t === 'chains') {
+      o += 'q ' + nf(it.lw * PT) + ' w ' + rgbS(it.c) + ' RG\n';
+      const S = it.s;
+      let buf = [];
+      for (const ch of it.chains) {
+        const p = ch.p;
+        buf.push(X(it.ox + p[0] * S) + ' ' + Y(it.oy + p[1] * S) + ' m');
+        for (let i = 2; i < p.length; i += 2) buf.push(X(it.ox + p[i] * S) + ' ' + Y(it.oy + p[i + 1] * S) + ' l');
+        if (ch.closed) buf.push('h');
+        if (buf.length > 4000) { o += buf.join('\n') + '\n'; buf = []; }
+      }
+      o += buf.join('\n') + '\nS Q\n';
+    } else if (it.t === 'rect') {
+      if (it.fill) o += rgbS(it.fill) + ' rg ' + X(it.x) + ' ' + Y(it.y + it.h) + ' ' + nf(it.w * PT) + ' ' + nf(it.h * PT) + ' re f\n';
+      if (it.lw) o += nf(it.lw * PT) + ' w ' + rgbS(it.c) + ' RG ' + X(it.x) + ' ' + Y(it.y + it.h) + ' ' + nf(it.w * PT) + ' ' + nf(it.h * PT) + ' re S\n';
+    } else if (it.t === 'circle') {
+      const c = it.r * 0.5523, cx = it.cx, cy = it.cy, r = it.r;
+      const path = X(cx + r) + ' ' + Y(cy) + ' m ' + X(cx + r) + ' ' + Y(cy + c) + ' ' + X(cx + c) + ' ' + Y(cy + r) + ' ' + X(cx) + ' ' + Y(cy + r) + ' c ' +
+        X(cx - c) + ' ' + Y(cy + r) + ' ' + X(cx - r) + ' ' + Y(cy + c) + ' ' + X(cx - r) + ' ' + Y(cy) + ' c ' +
+        X(cx - r) + ' ' + Y(cy - c) + ' ' + X(cx - c) + ' ' + Y(cy - r) + ' ' + X(cx) + ' ' + Y(cy - r) + ' c ' +
+        X(cx + c) + ' ' + Y(cy - r) + ' ' + X(cx + r) + ' ' + Y(cy - c) + ' ' + X(cx + r) + ' ' + Y(cy) + ' c h ';
+      if (it.fill) o += rgbS(it.fill) + ' rg ';
+      if (it.lw) o += nf(it.lw * PT) + ' w ' + rgbS(it.c) + ' RG ';
+      o += path + (it.fill && it.lw ? 'B' : it.fill ? 'f' : 'S') + '\n';
+    } else if (it.t === 'line') {
+      o += nf(it.lw * PT) + ' w ' + rgbS(it.c) + ' RG ' + X(it.x1) + ' ' + Y(it.y1) + ' m ' + X(it.x2) + ' ' + Y(it.y2) + ' l S\n';
+    } else if (it.t === 'img' || it.t === 'fill') {
+      const cv = it.t === 'img' ? it.cv : fillForPdf(it.res, it.pbn);
+      const n = await imageObj(pdf, cv), nm = 'I' + imgs.size;
+      imgs.set(nm, n);
+      o += 'q ' + nf(it.w * PT) + ' 0 0 ' + nf(it.h * PT) + ' ' + X(it.x) + ' ' + Y(it.y + it.h) + ' cm /' + nm + ' Do Q\n';
+    }
+  }
+  for (const p of spec.it) {
+    if (p.t !== 'text') continue;
+    const t = tiles.get(tkey(p));
+    if (!t) continue;
+    used.add(t.name);
+    const xl = p.a === 'c' ? p.x - t.wmm / 2 : p.a === 'r' ? p.x - t.wmm : p.x;
+    const bw = t.W / TILE_K, bh = t.H / TILE_K, top = p.y + t.offTop;
+    o += 'q ' + nf(bw * PT) + ' 0 0 ' + nf(bh * PT) + ' ' + X(xl + t.offX) + ' ' + Y(top + bh) + ' cm /' + t.name + ' Do Q\n';
+  }
+  return o;
+}
+async function makePdf(specs, title, prog) {
+  const pdf = new PdfW();
+  const cat = pdf.alloc(), pagesN = pdf.alloc(), infoN = pdf.alloc();
+  const tiles = await makeTiles(pdf, specs.map(s => s.it.filter(o => o.t === 'text')), prog);
+  const tn = new Map([...tiles.values()].map(t => [t.name, t.n]));
+  const kids = [];
+  for (let i = 0; i < specs.length; i++) {
+    const sp = specs[i], used = new Set(), imgs = new Map();
+    const ops = await pageOps(pdf, sp, tiles, used, imgs);
+    const cN = pdf.alloc(), pN = pdf.alloc();
+    await pdf.stream(cN, '', ops);
+    const xo = [...used].map(nm => '/' + nm + ' ' + tn.get(nm) + ' 0 R').concat([...imgs].map(([nm, n]) => '/' + nm + ' ' + n + ' 0 R')).join(' ');
+    pdf.put(pN, '<< /Type /Page /Parent ' + pagesN + ' 0 R /MediaBox [0 0 ' + nf(sp.W * PT) + ' ' + nf(sp.H * PT) + '] /Resources << /XObject << ' + xo + ' >> >> /Contents ' + cN + ' 0 R >>');
+    kids.push(pN);
+    if (prog) { prog('쪽 ' + (i + 1) + ' / ' + specs.length); await sleep0(); }
+  }
+  pdf.put(pagesN, '<< /Type /Pages /Kids [' + kids.map(n => n + ' 0 R').join(' ') + '] /Count ' + kids.length + ' >>');
+  pdf.put(cat, '<< /Type /Catalog /Pages ' + pagesN + ' 0 R /ViewerPreferences << /PrintScaling /None >> >>');
+  pdf.put(infoN, '<< /Title ' + pdfStr(title) + ' /Creator (coloring_page) /Producer (coloring_page) >>');
+  return { blob: pdf.blob(cat, infoN), pages: kids.length };
+}
+
+/* ══ 설정 ══ */
+const OPT0 = {
+  mode: 'line', detail: 5, colors: 12, ink: true, lw: 'm', paper: 'auto', head: 'none', title: '', frame: true, legend: 'same',
+  sym: 10, rings: 6, mstyle: 'mix', view: 'page'
+};
+let opt = JSON.parse(JSON.stringify(OPT0));
+function loadOpt() {
+  try {
+    const o = JSON.parse(localStorage.getItem(LS) || 'null');
+    if (o && typeof o === 'object') for (const k in OPT0) if (k in o && typeof o[k] === typeof OPT0[k]) opt[k] = o[k];
+  } catch (e) { /* 무시 */ }
+  if (!['line', 'pbn', 'mandala'].includes(opt.mode)) opt.mode = 'line';
+  opt.detail = clamp(Math.round(opt.detail), 1, 10); opt.colors = clamp(Math.round(opt.colors), 4, 30);
+  opt.rings = clamp(Math.round(opt.rings), 3, 9); if (![6, 8, 10, 12, 16].includes(opt.sym)) opt.sym = 10;
+  if (!LWMM[opt.lw]) opt.lw = 'm';
+  opt.view = 'page';
+}
+function saveOpt() { try { localStorage.setItem(LS, JSON.stringify(opt)); } catch (e) { /* 무시 */ } }
+const TYPES = [
+  { k: 'line', n: '선 그림 색칠공부', d: '사진·그림 → 선만 남기기' },
+  { k: 'pbn', n: '숫자 색칠', d: '칸마다 번호 + 색 안내' },
+  { k: 'mandala', n: '만다라 무늬', d: '어른·어르신 활동지' }
+];
+const TN = Object.fromEntries(TYPES.map(t => [t.k, t.n]));
+const TDESC = {
+  line: '사진이나 그림에서 <b>색이 바뀌는 곳마다 선</b>을 그어 칠할 칸을 만듭니다. 만화·캐릭터 그림은 검은 윤곽선을 그대로 따라 그립니다.',
+  pbn: '칸마다 <b>색 번호</b>를 적고, 번호별 색 안내와 완성 그림을 함께 뽑습니다. 번호대로 칠하면 원래 그림이 나타납니다.',
+  mandala: '누를 때마다 새로 그리는 <b>만다라 무늬</b>입니다. 사진이 필요 없고, 여러 장을 한 PDF로 묶을 수 있습니다.'
+};
+function typeIcon(k) {
+  const s = 'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"';
+  if (k === 'line') return '<svg viewBox="0 0 48 48" aria-hidden="true"><g ' + s + '><rect x="5" y="7" width="38" height="34" rx="4"/><path d="M5 33l11-11 9 9 6-6 12 12"/><circle cx="33" cy="17" r="4"/></g></svg>';
+  if (k === 'pbn') return '<svg viewBox="0 0 48 48" aria-hidden="true"><g ' + s + '><rect x="5" y="7" width="38" height="34" rx="4"/><path d="M5 26c10-4 16 6 26 1s8-7 12-6M20 7c-3 8 3 12 0 19M26 27c2 5-1 9 1 14"/></g><g fill="currentColor" font-size="8" font-weight="800" font-family="sans-serif"><text x="10" y="20">1</text><text x="31" y="19">2</text><text x="12" y="37">3</text><text x="32" y="37">4</text></g></svg>';
+  return '<svg viewBox="0 0 48 48" aria-hidden="true"><g ' + s + '><circle cx="24" cy="24" r="19"/><circle cx="24" cy="24" r="5"/>' +
+    [0, 1, 2, 3, 4, 5, 6, 7].map(i => { const a = i * Math.PI / 4, x1 = 24 + 5 * Math.cos(a), y1 = 24 + 5 * Math.sin(a), x2 = 24 + 17 * Math.cos(a), y2 = 24 + 17 * Math.sin(a), c = 24 + 12 * Math.cos(a + 0.35), d = 24 + 12 * Math.sin(a + 0.35); return '<path d="M' + x1.toFixed(1) + ' ' + y1.toFixed(1) + 'Q' + c.toFixed(1) + ' ' + d.toFixed(1) + ' ' + x2.toFixed(1) + ' ' + y2.toFixed(1) + '"/>'; }).join('') + '</g></svg>';
+}
+
+/* ══ 쪽(사진) ══ 사진마다 돌리기·자르기는 따로, 나머지 설정은 모든 쪽에 똑같이 */
+const MAXP = 40;
+let PAGES = [], cur = 0, MP = [], curM = 0, sheetNo = 0, pid = 0;
+function newPage(img, w, h, name, sample) {
+  const sc = Math.min(1, 1800 / Math.max(w, h));
+  const orig = makeCanvas(w * sc, h * sc), x = orig.getContext('2d');
+  x.fillStyle = '#fff'; x.fillRect(0, 0, orig.width, orig.height);
+  x.imageSmoothingQuality = 'high';
+  x.drawImage(img, 0, 0, orig.width, orig.height);
+  return { id: ++pid, name, orig, rot: 0, crop: { x: 0, y: 0, w: 1, h: 1 }, sample: !!sample, rc: null, rk: '', sc: null, sk: '', res: null, resK: '' };
+}
+function srcOf(pg) {
+  if (pg.rc && pg.rk === pg.rot) return pg.rc;
+  const o = pg.orig, w = o.width, h = o.height, sw = pg.rot % 180 ? h : w, sh = pg.rot % 180 ? w : h;
+  const c = makeCanvas(sw, sh), x = c.getContext('2d');
+  x.translate(sw / 2, sh / 2); x.rotate(pg.rot * Math.PI / 180); x.drawImage(o, -w / 2, -h / 2);
+  pg.rc = c; pg.rk = pg.rot;
+  return c;
+}
+function pageSrc(pg) {
+  const S = srcOf(pg), cr = pg.crop, key = pg.rot + '|' + cr.x.toFixed(4) + cr.y.toFixed(4) + cr.w.toFixed(4) + cr.h.toFixed(4);
+  if (pg.sc && pg.sk === key) return pg.sc;
+  const w = Math.max(1, cr.w * S.width), h = Math.max(1, cr.h * S.height), c = makeCanvas(w, h);
+  c.getContext('2d').drawImage(S, cr.x * S.width, cr.y * S.height, w, h, 0, 0, c.width, c.height);
+  pg.sc = c; pg.sk = key;
+  return c;
+}
+/* 세밀함 → 영역 나누기 값 */
+function segParams(pg) {
+  const d = opt.detail, src = pageSrc(pg), pbn = opt.mode === 'pbn';
+  const work = Math.round(520 + d * 40), sc = Math.min(1, work / Math.max(src.width, src.height));
+  const W = Math.max(8, Math.round(src.width * sc)), H = Math.max(8, Math.round(src.height * sc));
+  const minArea = Math.max(12, Math.round(W * H * 0.004 * Math.pow(0.72, d - 1)));
+  let thin = 2.2 + (10 - d) * 0.2;
+  /* 숫자 색칠 — 인쇄했을 때 번호(1.8mm 이상)가 들어갈 만큼 넓지 않은 칸은 이웃과 합친다 */
+  if (pbn) { const B = boxFor(W / H, opt.colors); thin = Math.max(thin, 1.5 / (B.w / W)); }
+  return { work, k: pbn ? opt.colors : 5 + d, minArea, thin: Math.round(thin * 100) / 100, ink: opt.ink, sigma: d <= 3 ? 4 : 3, smooth: 2.3, mode: d <= 7 ? 2 : 1, edgeT: pbn ? 2.5 : 11.5 - d * 0.75 };
+}
+function resultOf(pg) {
+  const P = segParams(pg), key = JSON.stringify(P) + pg.sk;
+  if (pg.res && pg.resK === key) return pg.res;
+  pg.res = segment(pageSrc(pg), P); pg.resK = key;
+  return pg.res;
+}
+function hasResult(pg) { const P = segParams(pg); return pg.res && pg.resK === JSON.stringify(P) + pg.sk; }
+
+/* ══ 만다라 쪽 ══ */
+function newSeed() { return (Math.random() * 2147483647) | 0 || 7; }
+function resetMandalas() { MP.forEach(m => { m.sh = null; }); }
+
+/* ══ 인쇄될 낱장 목록 ══ 숫자 색칠 + 「다음 쪽에 크게」면 사진마다 색 안내 쪽이 뒤따른다 */
+function sheets() {
+  if (opt.mode === 'mandala') return MP.map((m, i) => ({ k: 'm', i }));
+  const out = [];
+  PAGES.forEach((p, i) => { out.push({ k: 'p', i }); if (opt.mode === 'pbn' && opt.legend === 'next') out.push({ k: 'l', i }); });
+  return out;
+}
+function specOf(s, view) {
+  if (s.k === 'm') return mandalaPage(MP[s.i]);
+  const pg = PAGES[s.i], res = resultOf(pg);
+  if (s.k === 'l') return legendPage(res, PAGES.length > 1 ? s.i + 1 : 0);
+  return photoPage(pg, res, view || 'page');
+}
+
+/* ══ 화면 ══ */
+function renderTypes() {
+  $('#tgrid').innerHTML = TYPES.map(t => '<button type="button" class="tbtn" data-t="' + t.k + '">' + typeIcon(t.k) + '<b>' + t.n + '</b><i>' + t.d + '</i></button>').join('');
+}
+const segFill = (id, items, cur2) => { $(id).innerHTML = items.map(it => '<button type="button" data-v="' + it[0] + '"' + (String(cur2) === String(it[0]) ? ' class="on"' : '') + '>' + it[1] + (it[2] ? '<i>' + it[2] + '</i>' : '') + '</button>').join(''); };
+function paintControls() {
+  const m = opt.mode, mand = m === 'mandala';
+  document.querySelectorAll('#tgrid .tbtn').forEach(b => b.classList.toggle('on', b.dataset.t === m));
+  $('#typeHint').textContent = TN[m];
+  $('#typeDesc').innerHTML = TDESC[m];
+  $('#photoCard').classList.toggle('hide', mand);
+  $('#mandCard').classList.toggle('hide', !mand);
+  $('#tuneCard').classList.toggle('hide', mand);
+  $('#rowColors').classList.toggle('hide', m !== 'pbn');
+  $('#rowLegend').classList.toggle('hide', m !== 'pbn');
+  $('#rngDetail').value = opt.detail; $('#outDetail').textContent = opt.detail;
+  $('#rngColors').value = opt.colors; $('#outColors').textContent = opt.colors + '색';
+  $('#optInk').checked = opt.ink; $('#optFrame').checked = opt.frame;
+  $('#tuneHint').textContent = '세밀함 ' + opt.detail + (m === 'pbn' ? ' · ' + opt.colors + '색' : '');
+  segFill('#segLw', [['s', '가늘게', '0.3mm'], ['m', '보통', '0.5mm'], ['l', '굵게', '0.85mm']], opt.lw);
+  segFill('#segPaper', [['auto', '자동'], ['p', '세로'], ['l', '가로']], opt.paper);
+  segFill('#segHead', [['none', '없음'], ['name', '이름·날짜 칸'], ['title', '제목']], opt.head);
+  segFill('#segLegend', [['same', '같은 쪽 아래', '한 장으로'], ['next', '다음 쪽에 크게', '완성 그림 포함']], opt.legend);
+  segFill('#segSym', [[6, '6'], [8, '8'], [10, '10'], [12, '12'], [16, '16']], opt.sym);
+  segFill('#segStyle', [['round', '둥글게', '꽃잎·아치'], ['mix', '섞어서'], ['sharp', '뾰족하게', '잎·마름모']], opt.mstyle);
+  $('#rngRings').value = opt.rings; $('#outRings').textContent = opt.rings + '겹';
+  $('#titleIn').classList.toggle('hide', opt.head !== 'title');
+  if ($('#titleIn').value !== opt.title) $('#titleIn').value = opt.title;
+  $('#paperHint').textContent = { auto: 'A4 · 자동', p: 'A4 세로', l: 'A4 가로' }[opt.paper];
+  $('#mandHint').textContent = '대칭 ' + opt.sym + ' · ' + opt.rings + '겹';
+  document.querySelectorAll('#viewGrp .tb').forEach(b => b.classList.toggle('on', b.dataset.v === opt.view));
+}
+function thumbOf(cv, w) {
+  const t = makeCanvas(w * 2, w * 2), x = t.getContext('2d'), s = Math.min(t.width / cv.width, t.height / cv.height);
+  x.fillStyle = '#fff'; x.fillRect(0, 0, t.width, t.height);
+  x.drawImage(cv, (t.width - cv.width * s) / 2, (t.height - cv.height * s) / 2, cv.width * s, cv.height * s);
+  return t;
+}
+function renderStrip() {
+  const st = $('#strip');
+  st.innerHTML = '';
+  PAGES.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'th' + (i === cur ? ' on' : ''); b.dataset.i = i;
+    b.setAttribute('aria-label', (i + 1) + '번째 사진 · ' + p.name);
+    b.appendChild(thumbOf(pageSrc(p), 33));
+    const n = document.createElement('span'); n.className = 'no'; n.textContent = i + 1; b.appendChild(n);
+    st.appendChild(b);
+  });
+  if (PAGES.length && PAGES.length < MAXP) {
+    const a = document.createElement('button');
+    a.type = 'button'; a.className = 'th add'; a.id = 'addMore'; a.textContent = '＋'; a.setAttribute('aria-label', '사진 더 넣기');
+    st.appendChild(a);
+  }
+  $('#stripK').innerHTML = PAGES.length ? '<b>넣은 사진 ' + PAGES.length + '장</b><span>누르면 그 쪽을 고칩니다 · PDF에 차례대로 들어갑니다</span>' : '';
+  $('#photoHint').textContent = PAGES.length ? PAGES.length + '장' : '';
+  const has = !!PAGES.length;
+  $('#srcBox').classList.toggle('hide', !has);
+  if (has) { const p = PAGES[cur]; $('#srcName').textContent = (cur + 1) + '번 · ' + p.name + ' · ' + p.orig.width + '×' + p.orig.height + 'px'; }
+}
+function renderMStrip() {
+  const st = $('#mStrip');
+  st.innerHTML = '';
+  MP.forEach((m, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'th' + (i === curM ? ' on' : ''); b.dataset.i = i;
+    b.setAttribute('aria-label', (i + 1) + '번째 무늬');
+    const c = makeCanvas(66 * 2, 66 * 2), x = c.getContext('2d');
+    if (!m.sh) m.sh = mandala(m.seed, opt.sym, opt.rings, opt.mstyle);
+    drawPage(x, { W: 66, H: 66, it: [{ t: 'chains', chains: m.sh, ox: 33, oy: 33, s: 31, lw: 0.55, c: INK }] }, 2);
+    b.appendChild(c);
+    const n = document.createElement('span'); n.className = 'no'; n.textContent = i + 1; b.appendChild(n);
+    st.appendChild(b);
+  });
+  $('#mStripK').innerHTML = '<b>무늬 ' + MP.length + '장</b><span>누르면 그 쪽을 보고 고칩니다</span>';
+  $('#mAdd').disabled = MP.length >= MAXP;
+}
+/* 미리보기 — 낱장 한 장을 A4 모양 그대로 */
+let lastSpec = null;
+function renderPv() {
+  const sh = sheets(), cv = $('#pv'), mand = opt.mode === 'mandala';
+  $('#dlPdf').disabled = !sh.length; $('#dlPng').disabled = !sh.length;
+  $('#pvEmpty').classList.toggle('hide', !!sh.length); cv.classList.toggle('hide', !sh.length);
+  $('#pnav').style.visibility = sh.length > 1 ? 'visible' : 'hidden';
+  $('#pdfSub').textContent = sh.length ? 'A4 ' + sh.length + '쪽 · 인쇄용' : 'A4 · 인쇄용';
+  if (!sh.length) { $('#pvMeta').innerHTML = ''; $('#pvState').textContent = ''; $('#legCard').classList.add('hide'); $('#mbarTxt').textContent = '사진을 넣어 주세요'; lastSpec = null; return; }
+  sheetNo = clamp(sheetNo, 0, sh.length - 1);
+  const s = sh[sheetNo];
+  $('#viewGrp').style.display = mand || s.k === 'l' ? 'none' : '';
+  $('#pNo').textContent = (sheetNo + 1) + ' / ' + sh.length;
+  $('#pPrev').disabled = sheetNo === 0; $('#pNext').disabled = sheetNo === sh.length - 1;
+  let spec;
+  try { spec = specOf(s, opt.view); } catch (e) { console.error(e); toast('도안을 만들지 못했습니다 · ' + ((e && e.message) || e), 5200); return; }
+  lastSpec = spec;
+  /* PC 는 A4 한 장이 화면 높이 안에 다 들어오게, 휴대폰은 폭에 맞춘다 */
+  const box = $('#pvBox'), pc = window.matchMedia('(min-width:980px)').matches;
+  let bw = Math.max(200, Math.min(box.clientWidth - 18, 560));
+  if (pc) bw = Math.max(220, Math.min(bw, (window.innerHeight - 350) * spec.W / spec.H));
+  const k = bw / spec.W, dpr = Math.min(2.5, window.devicePixelRatio || 1);
+  const pw = Math.round(bw * dpr), ph = Math.round(spec.H * k * dpr);
+  if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+  cv.style.width = bw + 'px'; cv.style.height = Math.round(spec.H * k) + 'px';
+  drawPage(cv.getContext('2d'), spec, k * dpr);
+  /* 설명 */
+  const land = spec.W > spec.H ? '가로' : '세로';
+  if (s.k === 'm') {
+    $('#pvMeta').innerHTML = '<b>만다라 ' + (s.i + 1) + '번</b> · 대칭 ' + opt.sym + ' · ' + opt.rings + '겹 · A4 ' + land;
+    $('#pvState').textContent = MP.length + '장';
+  } else {
+    const pg = PAGES[s.i], res = resultOf(pg);
+    if (s.k === 'l') $('#pvMeta').innerHTML = '<b>' + (s.i + 1) + '번 그림의 색 안내 쪽</b> · 색 ' + res.pal.length + '개 · 완성 그림';
+    else $('#pvMeta').innerHTML = (opt.mode === 'pbn' ? '<b>칠할 칸 ' + fmtN(res.n) + '개 · 색 ' + res.pal.length + '개</b>' : '<b>칠할 칸 ' + fmtN(res.n) + '개</b>') +
+      ' · A4 ' + land + (res.n > 160 && opt.mode === 'line' ? '<br>칸이 많습니다 — 어린아이용이면 <b>세밀함</b>을 낮춰 보세요' : '') +
+      (opt.view === 'color' ? '<br>「색칠 예시」는 화면 확인용입니다 · 저장하면 선만 들어갑니다' : opt.view === 'orig' ? '<br>원본을 옆에 두고 비교해 보세요 · 저장하면 선만 들어갑니다' : '');
+    $('#pvState').textContent = res.W + '×' + res.H;
+    renderLegend(res);
+  }
+  if (s.k === 'm') $('#legCard').classList.add('hide');
+  $('#mbarTxt').textContent = TN[opt.mode] + ' · ' + sh.length + '쪽';
+}
+function renderLegend(res) {
+  const on = opt.mode === 'pbn';
+  $('#legCard').classList.toggle('hide', !on);
+  if (!on) return;
+  $('#legHint').textContent = res.pal.length + '색';
+  $('#legSum').innerHTML = '<b>' + (sheets()[sheetNo].i + 1) + '번 그림</b>에 쓰는 색입니다. 넓게 쓰인 색이 1번 · 괄호는 칠할 칸 수';
+  $('#leg').innerHTML = res.pal.map((p, i) => '<div class="li"><span class="sw" style="background:' + p.hex + ';color:' + inkOn(p.hex) + '">' + (i + 1) + '</span>' +
+    '<span class="tx"><b>' + escH(p.name) + '</b><i>' + p.hex.toUpperCase() + '</i></span><span class="ct">' + p.regions + '칸</span></div>').join('');
+}
+/* 무거운 계산(영역 나누기)은 「그리는 중」 표시를 먼저 그린 뒤에 */
+let pvT = 0;
+function schedule(delay) {
+  clearTimeout(pvT);
+  const sh = sheets(), s = sh[clamp(sheetNo, 0, Math.max(0, sh.length - 1))];
+  const slow = s && s.k !== 'm' && !hasResult(PAGES[s.i]);
+  if (slow) $('#pvBox').classList.add('busy');
+  pvT = setTimeout(() => { renderPv(); $('#pvBox').classList.remove('busy'); updateMbar(); }, delay == null ? (slow ? 40 : 0) : delay);
+}
+function refreshAll() { paintControls(); if (opt.mode === 'mandala') renderMStrip(); else renderStrip(); drawCrop(); schedule(); }
+
+/* ══ 자르기 ══ */
+let CV = null, cdrag = null;
+function drawCrop() {
+  const cv = $('#cropCv'), pg = PAGES[cur];
+  if (!pg || opt.mode === 'mandala') return;
+  const S = srcOf(pg), CROP = pg.crop;
+  const wrap = cv.parentElement, bw = Math.max(160, wrap.clientWidth || 300), maxH = 300;
+  const sc = Math.min(bw / S.width, maxH / S.height, 2);
+  const w = S.width * sc, h = S.height * sc, dpr = Math.min(2, window.devicePixelRatio || 1);
+  if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+  cv.style.width = w + 'px'; cv.style.height = h + 'px';
+  const x = cv.getContext('2d');
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.clearRect(0, 0, w, h);
+  x.imageSmoothingQuality = 'high';
+  x.drawImage(S, 0, 0, w, h);
+  const r = { x: CROP.x * w, y: CROP.y * h, w: CROP.w * w, h: CROP.h * h };
+  x.fillStyle = 'rgba(24,12,6,.56)';
+  x.beginPath(); x.rect(0, 0, w, h); x.rect(r.x, r.y, r.w, r.h); x.fill('evenodd');
+  x.lineWidth = 2; x.strokeStyle = '#ffffff'; x.strokeRect(r.x + 1, r.y + 1, r.w - 2, r.h - 2);
+  x.setLineDash([5, 5]); x.lineWidth = 1; x.strokeStyle = 'rgba(234,88,12,.95)'; x.strokeRect(r.x + 1, r.y + 1, r.w - 2, r.h - 2); x.setLineDash([]);
+  const hs = 13;
+  for (const [cx, cy] of [[r.x, r.y], [r.x + r.w, r.y], [r.x, r.y + r.h], [r.x + r.w, r.y + r.h]]) {
+    x.fillStyle = '#ffffff'; x.strokeStyle = '#ea580c'; x.lineWidth = 2.2;
+    x.beginPath(); x.rect(cx - hs / 2, cy - hs / 2, hs, hs); x.fill(); x.stroke();
+  }
+  CV = { w, h };
+}
+function cropHit(p) {
+  const C = PAGES[cur].crop, r = { x: C.x * CV.w, y: C.y * CV.h, w: C.w * CV.w, h: C.h * CV.h }, hs = 22;
+  const corners = { nw: [r.x, r.y], ne: [r.x + r.w, r.y], sw: [r.x, r.y + r.h], se: [r.x + r.w, r.y + r.h] };
+  let best = null, bd = hs;
+  for (const k in corners) { const d = Math.max(Math.abs(p.x - corners[k][0]), Math.abs(p.y - corners[k][1])); if (d <= bd) { bd = d; best = k; } }
+  if (best) return best;
+  if (p.x > r.x && p.x < r.x + r.w && p.y > r.y && p.y < r.y + r.h) return 'move';
+  return 'new';
+}
+function cropMove(p) {
+  const pg = PAGES[cur], S = srcOf(pg), d = cdrag, dx = (p.x - d.p0.x) / CV.w, dy = (p.y - d.p0.y) / CV.h, c0 = d.c0;
+  const mw = Math.max(0.05, 24 / S.width), mh = Math.max(0.05, 24 / S.height);
+  if (d.mode === 'move') { pg.crop = { x: clamp(c0.x + dx, 0, 1 - c0.w), y: clamp(c0.y + dy, 0, 1 - c0.h), w: c0.w, h: c0.h }; return; }
+  let l = c0.x, r = c0.x + c0.w, t = c0.y, b = c0.y + c0.h;
+  if (d.mode.includes('w')) l = clamp(l + dx, 0, r - mw);
+  if (d.mode.includes('e')) r = clamp(r + dx, l + mw, 1);
+  if (d.mode.includes('n')) t = clamp(t + dy, 0, b - mh);
+  if (d.mode.includes('s')) b = clamp(b + dy, t + mh, 1);
+  pg.crop = { x: l, y: t, w: r - l, h: b - t };
+}
+
+/* ════════════════════════════════════════════════════════════
+   앱 안 브라우저(네이버·카카오톡 등) — 파일 내려받기가 막혀 있다
+     ① 앱 안에서 열리면 사용을 막는 창을 띄워 브라우저를 옮기게 한다
+     ② 그래도 저장을 누르면 blob: 대신 data: 주소로 시도한다(10MB 까지)
+     ③ 아이폰은 사파리를 강제로 열 수 없어 주소 복사 + 메뉴 안내로 간다
+   ════════════════════════════════════════════════════════════ */
+const UA = navigator.userAgent || '';
+const IA = {
+  naver: /NAVER\(inapp/i.test(UA),
+  kakao: /KAKAOTALK/i.test(UA),
+  line: /\bLine\//i.test(UA),
+  ios: /iPhone|iPad|iPod/i.test(UA),
+  android: /Android/i.test(UA)
+};
+IA.on = IA.naver || IA.kakao || IA.line ||
+  /Instagram|FBAN|FBAV|FB_IAB|DaumApps|everytimeApp|band\/|KAKAOSTORY/i.test(UA) ||
+  (IA.android && /;\s*wv\)/i.test(UA));   /* 안드로이드 WebView 표시 */
+const IA_MAX = 10 * 1048576;               /* data: 주소는 base64 라 4/3 배로 커진다 — 그 이상은 막는다 */
+
+function externalUrl() {
+  const url = location.href;
+  if (IA.kakao) return 'kakaotalk://web/openExternal?url=' + encodeURIComponent(url);
+  if (IA.line) return url + (url.indexOf('?') >= 0 ? '&' : '?') + 'openExternalBrowser=1';
+  if (IA.android) return 'intent://' + url.replace(/^https?:\/\//i, '') +
+    '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+  return '';          /* 아이폰은 사파리를 강제로 열 수 없다 */
+}
+function copyAddr(guide) {
+  const url = location.href;
+  const done = () => toast(guide ? '주소를 복사했습니다. 사파리를 열고 붙여 넣거나, 메뉴에서 「다른 브라우저로 열기」를 누르세요.' : '주소를 복사했습니다.', 5200);
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, () => fallbackCopy(url, done)); return; }
+  } catch (e) { /* 아래로 */ }
+  fallbackCopy(url, done);
+}
+function fallbackCopy(text, done) {
+  const t = document.createElement('textarea');
+  t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;left:-9999px;top:0';
+  document.body.appendChild(t); t.select(); t.setSelectionRange(0, text.length);
+  try { document.execCommand('copy'); done(); } catch (e) { toast('주소를 길게 눌러 복사해 주세요.', 4200); }
+  t.remove();
+}
+/* 저장은 전부 이 한 곳을 거친다. 막혔으면 false */
+function download(blob, name) {
+  if (IA.on) return downloadInApp(blob, name);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+  return true;
+}
+function downloadInApp(blob, name) {
+  if (blob.size > IA_MAX) {
+    toast('앱 안에서는 10MB가 넘는 파일을 저장할 수 없습니다. 위쪽 「' + $('#iaGo').textContent + '」를 눌러 주세요.', 5600);
+    return false;
+  }
+  const go = href => {
+    const a = document.createElement('a');
+    a.href = href; a.download = name; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+  const fr = new FileReader();
+  fr.onload = () => { try { go(fr.result); } catch (e) { /* 안내로 넘어간다 */ } };
+  fr.onerror = () => toast('앱 안에서는 저장이 막혀 있습니다. 위쪽 「' + $('#iaGo').textContent + '」를 눌러 주세요.', 5200);
+  fr.readAsDataURL(blob);
+  return true;
+}
+
+/* ════════════════════════════════════════════════════════════
+   광고 — 한 화면에 4곳 (애드핏 운영정책: 한 페이지 4개 초과 게재 금지)
+     모바일  ① 맨 위 320×50   ③ 본문 320×100   ④ 완료 카드 300×250   ⑤ 하단 오버형 320×50
+     PC      ① 맨 위 320×50   ② 미리보기 위 320×50   ③ 본문 320×100   ④ 완료 카드 300×250
+   지킨 것
+     · ins 를 자리마다 다 만든 뒤 ba.min.js 는 맨 끝에 딱 한 번 붙인다
+     · 사진·설정을 고르는 중·도안을 보는 중에는 오버형을 내려 둔다(핵심 행동 중 광고 노출 금지)
+     · 완료 광고는 창으로 덮지 않고 본문에 카드로 펼친다(콘텐츠를 가리는 배치 금지)
+     · 앱 안에서 막는 창이 떠 있으면 광고를 부르지 않는다
+   ※ 단위 ID 는 애드핏에서 크기별로 따로 발급받아 아래 units 에만 적으면 된다.
+     DAN-XXXX… 로 남아 있는 자리는 점선 자리표시자만 그리고 요청은 보내지 않는다.
+   ════════════════════════════════════════════════════════════ */
+const AD = {
+  units: {
+    top:     { id: 'DAN-XXXXXXXXXXXXXXX1', w: 320, h: 50 },   /* 맨 위 · 모바일과 PC 크기가 같아 하나로 겸한다 */
+    side_pc: { id: 'DAN-XXXXXXXXXXXXXXX2', w: 320, h: 50 },   /* PC 미리보기 카드 위 (좁은 화면에서는 안 뜬다) */
+    mid:     { id: 'DAN-XXXXXXXXXXXXXXX3', w: 320, h: 100 },  /* 본문 중간 · 모바일·PC 같은 자리라 하나로 쓴다 */
+    done:    { id: 'DAN-XXXXXXXXXXXXXXX4', w: 300, h: 250 },  /* 저장 완료 카드 · 모바일·PC 공통 */
+    anchor:  { id: 'DAN-XXXXXXXXXXXXXXX5', w: 320, h: 50 }    /* 모바일 하단 오버형 (PC 에서는 안 뜬다) */
+  },
+  iframeOk: true,   /* iframe 안에서도 띄우려면 true (애드핏에서는 권하지 않음) */
+  popup: true,      /* 완료 카드 */
+  overlay: true,    /* 하단 오버형 */
+  init() {
+    if (this.started) return;
+    this.started = true;
+    this.off = window.top !== window.self && !this.iframeOk;
+    this.pc = window.matchMedia('(min-width:980px)').matches;
+    if (this.off) { document.body.classList.add('no-ad'); return; }
+    this.put($('#ad-top'), 'top');
+    if (this.pc) this.put($('#ad-side'), 'side_pc');
+    this.put($('#ad-mid'), 'mid');
+    /* 숨어 있는 자리(하단 오버형·완료 카드)는 화면에 나온 다음에 부른다 —
+       안 보이는 동안 부르면 보는 사람 없이 노출만 잡힌다 */
+    this.load();
+  },
+  put(box, key, preload) {
+    const u = this.units[key];
+    if (!box || !u || box.dataset.ad) return;
+    if (document.querySelectorAll('ins.kakao_ad_area').length >= 4) return;
+    box.dataset.ad = key;
+    box.style.width = u.w + 'px';
+    if (/XXXX/.test(u.id)) { box.style.height = u.h + 'px'; box.innerHTML = '<div class="ad-ph">광고 ' + u.w + ' × ' + u.h + '</div>'; return; }
+    box.style.minHeight = u.h + 'px';
+    /* 광고가 안 내려오면 빈 칸이 남는다 — 공식 콜백으로 접는다. 단위가 여럿이면 이름이 서로 달라야 한다 */
+    const fail = 'adNone_' + box.id.replace(/-/g, '_');
+    window[fail] = () => {
+      box.classList.add('ad-none');
+      if (key === 'anchor') { this.closed = true; this.sync(true); }
+      if (key === 'done') { const d = $('#doneAd'); if (d) d.classList.add('ad-none'); }
+    };
+    const ins = document.createElement('ins');
+    ins.className = 'kakao_ad_area'; ins.style.display = 'none';
+    ins.setAttribute('data-ad-unit', u.id);
+    ins.setAttribute('data-ad-width', String(u.w));
+    ins.setAttribute('data-ad-height', String(u.h));
+    ins.setAttribute('data-ad-onfail', fail);
+    if (preload) ins.setAttribute('data-ad-preload', 'Y');
+    box.appendChild(ins);
+    this.need = true;
+  },
+  show(box, key) {
+    if (this.off || !this.started || !box || box.dataset.ad) return;
+    this.put(box, key, true);
+    this.load();
+    try {
+      const ins = box.querySelector('ins');
+      if (ins && window.adfit && typeof window.adfit.render === 'function') window.adfit.render(ins);
+    } catch (e) { /* 안 되면 0.7초 뒤 preload 차례가 채운다 */ }
+  },
+  load() {
+    if (!this.need || this.loaded) return;
+    this.loaded = true;
+    const s = document.createElement('script');
+    s.type = 'text/javascript'; s.async = true;
+    s.src = 'https://t1.kakaocdn.net/kas/static/ba.min.js';
+    document.body.appendChild(s);
+  },
+  onScreen(el) {
+    if (!el || el.classList.contains('hide')) return false;
+    const r = el.getBoundingClientRect();
+    return r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
+  },
+  /* 하단 오버형 — 읽는 구간(이럴 때 씁니다·자주 묻는 것·주의)에서만 올라온다.
+     종류·사진·무늬·선·종이·미리보기·완료·색 안내 카드 가운데 하나라도 화면에 보이면 내린다.
+     (휴대폰에서는 main·aside 가 display:contents 라 카드마다 따로 본다) */
+  sync(barOn) {
+    if (this.off || this.pc || !this.overlay || !this.started) return;
+    const modal = document.body.classList.contains('ia-lock');
+    const ae = document.activeElement;
+    const typing = !!(ae && ae.closest && (ae.closest('#form') || ae.closest('#side')) &&
+      (/^(SELECT|TEXTAREA)$/.test(ae.tagName) || (ae.tagName === 'INPUT' && !/^(checkbox|radio|button|file|range|color)$/.test(ae.type))));
+    const working = ['#typeCard', '#photoCard', '#mandCard', '#tuneCard', '#paperCard', '#pvCard', '#doneCard', '#legCard'].some(s => this.onScreen($(s)));
+    const show = !this.closed && !barOn && !modal && !typing && !working && window.scrollY > 320;
+    $('#anchor').classList.toggle('on', show);
+    document.body.classList.toggle('anch', show);
+    if (show) this.show($('#ad-anchor'), 'anchor');
+  },
+  done(msg, title) {
+    if (!this.popup) return;
+    $('#doneMsg').textContent = msg;
+    if (title) $('#doneTitle').textContent = title;
+    $('#doneCard').classList.remove('hide');
+    if (!this.off) this.show($('#ad-done'), 'done');
+    clearTimeout(this.goT);
+    this.goT = setTimeout(() => {
+      $('#doneCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      updateMbar();
+    }, 250);
+  },
+  hideDone() { $('#doneCard').classList.add('hide'); updateMbar(); }
+};
+
+function initInApp() {
+  if (!IA.on) return;
+  const app = IA.naver ? (/NAVER\(inapp;\s*blog/i.test(UA) ? '네이버 블로그 앱' : '네이버 앱') : IA.kakao ? '카카오톡' : IA.line ? '라인' : '앱';
+  const copyOnly = IA.ios && !IA.kakao && !IA.line;
+  const chromeIntent = IA.android && !IA.kakao && !IA.line;
+  document.body.classList.add('inapp');
+  $('#iaMsg').textContent = app + ' 안에서는 도안 PDF·그림 저장이 안 됩니다.';
+  $('#doneInapp').classList.remove('hide');
+  $('#iaDesc').innerHTML = '<b>' + app + '</b> 안에서 열렸습니다. 이 화면에서는 ' +
+    '<b>만든 도안(PDF·PNG)을 내려받을 수 없습니다.</b> 사진을 넣고 선을 다 맞춰도 저장이 안 되니 ' +
+    '<b>시작하기 전에</b> 브라우저를 옮겨 주세요.';
+  const steps = copyOnly
+    ? ['아래 <b>주소 복사</b>를 누르세요.',
+       '오른쪽 아래 <b>메뉴</b>에서 「다른 브라우저로 열기」를 누르거나, <b>사파리</b> 주소창에 붙여 넣으세요.']
+    : chromeIntent
+      ? ['아래 <b>크롬에서 열기</b>를 누르세요.',
+         '크롬이 없으면 오른쪽 위 <b>메뉴</b>에서 「다른 브라우저로 열기」를 누르세요.']
+      : ['아래 <b>다른 브라우저로 열기</b>를 누르세요.',
+         '열리지 않으면 ' + (IA.ios ? '화면의' : '오른쪽 위') + ' <b>메뉴</b>에서 「다른 브라우저로 열기」를 누르세요.'];
+  $('#iaSteps').innerHTML = steps.map(t => '<li>' + t + '</li>').join('');
+  const label = copyOnly ? '주소 복사' : chromeIntent ? '크롬에서 열기' : '다른 브라우저로 열기';
+  $('#iaGo').textContent = label; $('#iaGo2').textContent = label; $('#doneGo').textContent = label;
+  $('#iaSub').textContent = copyOnly
+    ? '사파리에 붙여 넣거나, 오른쪽 아래 메뉴에서 「다른 브라우저로 열기」를 누르세요.'
+    : '크롬·기본 브라우저에서 열면 바로 저장됩니다.';
+  let hidden = false;
+  try { hidden = sessionStorage.getItem('coloring_page.iahide') === '1'; } catch (e) { /* 무시 */ }
+  if (hidden) document.body.classList.remove('inapp');
+  lockInApp(true);
+}
+function lockInApp(on) {
+  document.body.classList.toggle('ia-lock', on);
+  const w = document.querySelector('.wrap');
+  if (on) w.setAttribute('inert', ''); else w.removeAttribute('inert');
+  if (!on) $('#iaModal').blur();
+}
+function iaCopied() {
+  $('#iaDesc').innerHTML = '주소를 <b>복사했습니다.</b> 이제 <b>사파리</b>를 열고 주소창에 붙여 넣으세요.';
+  $('#iaSteps').innerHTML = '<li>홈 화면에서 <b>사파리</b>를 엽니다.</li>' +
+    '<li>주소창을 길게 눌러 <b>붙여넣기</b> 하세요.</li>' +
+    '<li>또는 이 화면의 <b>메뉴</b> → 「다른 브라우저로 열기」.</li>';
+}
+const locked = () => document.body.classList.contains('ia-lock');
+
+/* 휴대폰: 선 다듬기·종이·색 안내를 만지는 동안 미리보기가 화면 밖이면 아래 바를 띄운다 */
+function updateMbar() {
+  const pr = $('#pvCard').getBoundingClientRect();
+  const inSet = AD.onScreen($('#tuneCard')) || AD.onScreen($('#paperCard')) || AD.onScreen($('#legCard'));
+  const on = sheets().length > 0 && inSet && (pr.bottom < 60 || pr.top > window.innerHeight);
+  $('#mbar').classList.toggle('on', on);
+  $('#mbarGo').textContent = pr.bottom < 60 ? '미리보기 ↑' : '미리보기 ↓';
+  AD.sync(on);
+}
+
+/* ══ 사진 넣기 ══ */
+async function fileToImg(f) {
+  const url = URL.createObjectURL(f);
+  try {
+    const img = new Image();
+    img.decoding = 'async'; img.src = url;
+    await img.decode();
+    if (!img.naturalWidth) throw new Error('empty');
+    return img;
+  } finally { setTimeout(() => URL.revokeObjectURL(url), 1000); }
+}
+async function addFiles(files) {
+  if (locked()) return;
+  const list = [...files].filter(f => f && (!f.type || /^image\//.test(f.type)));
+  if (!list.length) { toast('사진 파일이 아닙니다 · JPG·PNG·WEBP를 넣어 주세요', 4200); return; }
+  /* 예시만 들어 있으면 예시는 빼고 시작한다 */
+  if (PAGES.length && PAGES.every(p => p.sample)) { PAGES = []; cur = 0; }
+  let ok = 0, bad = 0, first = PAGES.length;
+  for (const f of list) {
+    if (PAGES.length >= MAXP) { toast('한 번에 ' + MAXP + '장까지 넣을 수 있습니다', 4200); break; }
+    try { const img = await fileToImg(f); PAGES.push(newPage(img, img.naturalWidth, img.naturalHeight, f.name || '붙여 넣은 사진')); ok++; }
+    catch (e) { bad++; if (bad === 1) toast(/hei[cf]/i.test((f.type || '') + (f.name || '')) ? 'HEIC 사진은 이 브라우저에서 열 수 없습니다 · 사진 앱에서 JPG로 내보내거나 화면을 캡처해 넣어 주세요' : '사진을 열지 못했습니다 · 다른 사진으로 해 보세요', 5600); }
+  }
+  if (!ok) return;
+  cur = first; gotoPage(cur);
+  toast(ok > 1 ? '사진 ' + ok + '장을 넣었습니다 · 쪽마다 한 장씩 들어갑니다' : '사진을 넣었습니다 · 쓸 부분을 고르고 세밀함을 맞추세요', 3000);
+}
+function loadSample(key) {
+  if (locked()) return;
+  const s = SAMPLES.find(v => v[0] === key);
+  if (!s) return;
+  const cv = makeCanvas(s[2], s[3]);
+  drawSample(key, cv);
+  const pg = newPage(cv, s[2], s[3], '예시 · ' + s[1], true);
+  if (!PAGES.length || PAGES.every(p => p.sample)) { PAGES = [pg]; cur = 0; }
+  else { if (PAGES.length >= MAXP) return; PAGES.push(pg); cur = PAGES.length - 1; }
+  gotoPage(cur);
+}
+/* 사진 쪽 하나로 이동 — 미리보기도 그 쪽으로 */
+function gotoPage(i) {
+  cur = clamp(i, 0, Math.max(0, PAGES.length - 1));
+  const sh = sheets();
+  const j = sh.findIndex(s => s.k === 'p' && s.i === cur);
+  if (j >= 0) sheetNo = j;
+  refreshAll();
+}
+
+/* ══ 저장 ══ */
+let busy = false;
+function docTitle() {
+  const d = new Date(), day = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+  return ({ line: '색칠공부_도안', pbn: '숫자색칠_도안', mandala: '만다라_도안' })[opt.mode] + '_' + day;
+}
+async function savePdf() {
+  if (busy || locked()) return;
+  const sh = sheets();
+  if (!sh.length) return;
+  busy = true;
+  const b = $('#dlPdf'), old = b.innerHTML;
+  b.disabled = true;
+  const prog = t => { b.innerHTML = 'PDF 만드는 중<i>' + t + '</i>'; };
+  try {
+    const t0 = performance.now(), specs = [];
+    for (let i = 0; i < sh.length; i++) {
+      if (sh[i].k === 'p' && !hasResult(PAGES[sh[i].i])) { prog('선 뽑는 중 ' + (sh[i].i + 1) + ' / ' + PAGES.length); await sleep0(); }
+      specs.push(specOf(sh[i], 'page'));
+    }
+    const name = docTitle() + '.pdf';
+    const r = await makePdf(specs, docTitle(), prog);
+    window.__cp_last = { blob: r.blob, name, pages: r.pages, ms: Math.round(performance.now() - t0) };
+    if (!download(r.blob, name)) return;
+    toast('저장했습니다 · ' + name + ' · ' + fmtSize(r.blob.size), 3400);
+    AD.done('「' + name + '」로 저장했습니다(A4 ' + r.pages + '쪽 · ' + fmtSize(r.blob.size) + ').', '도안 PDF를 저장했습니다');
+  } catch (e) {
+    console.error(e);
+    toast('만들지 못했습니다 · ' + ((e && e.message) || e), 5200);
+  } finally { busy = false; b.disabled = false; b.innerHTML = old; renderPv(); }
+}
+async function savePng() {
+  if (busy || locked() || !lastSpec) return;
+  busy = true;
+  try {
+    const spec = lastSpec;
+    let blob = null, dpi = 0;
+    for (const d of [300, 200, 150]) {
+      const k = d / 25.4, cv = makeCanvas(spec.W * k, spec.H * k);
+      try {
+        drawPage(cv.getContext('2d'), spec, k);
+        blob = await new Promise(res => cv.toBlob(res, 'image/png'));
+      } catch (e) { blob = null; }
+      cv.width = cv.height = 1;
+      if (blob) { dpi = d; break; }
+    }
+    if (!blob) throw new Error('그림이 너무 큽니다');
+    const name = docTitle() + '_' + (sheetNo + 1) + '쪽.png';
+    window.__cp_png = { blob, name, dpi };
+    if (!download(blob, name)) return;
+    toast('저장했습니다 · ' + name + ' · ' + fmtSize(blob.size), 3400);
+    AD.done('「' + name + '」로 저장했습니다(' + dpi + 'dpi · ' + fmtSize(blob.size) + ').', '도안 그림을 저장했습니다');
+  } catch (e) {
+    console.error(e);
+    toast('만들지 못했습니다 · ' + ((e && e.message) || e), 5200);
+  } finally { busy = false; }
+}
+
+function init() {
+  loadOpt();
+  renderTypes();
+  paintControls();
+  /* 1. 종류 */
+  $('#tgrid').addEventListener('click', e => {
+    const b = e.target.closest('.tbtn'); if (!b || b.dataset.t === opt.mode || locked()) return;
+    opt.mode = b.dataset.t; opt.view = 'page'; saveOpt();
+    if (opt.mode === 'mandala' && !MP.length) MP.push({ seed: newSeed() });
+    sheetNo = opt.mode === 'mandala' ? curM : Math.max(0, sheets().findIndex(s => s.k === 'p' && s.i === cur));
+    refreshAll();
+  });
+  /* 2. 사진 */
+  const sm = $('#samples');
+  SAMPLES.forEach(([k, n, w, h]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.k = k;
+    const c = makeCanvas(56, 56 * h / w); drawSample(k, c);
+    b.appendChild(c); b.appendChild(document.createTextNode(n));
+    sm.appendChild(b);
+  });
+  sm.addEventListener('click', e => { const b = e.target.closest('button'); if (b) loadSample(b.dataset.k); });
+  $('#fileIn').addEventListener('change', e => { const fs = e.target.files ? [...e.target.files] : []; e.target.value = ''; addFiles(fs); });
+  const drop = $('#drop');
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, () => drop.classList.remove('over')));
+  window.addEventListener('dragover', e => e.preventDefault());
+  window.addEventListener('drop', e => { e.preventDefault(); const fs = e.dataTransfer && e.dataTransfer.files; if (fs && fs.length) addFiles(fs); });
+  window.addEventListener('paste', e => {
+    if (locked()) return;
+    const items = e.clipboardData && e.clipboardData.items;
+    if (!items) return;
+    const fs = [];
+    for (const it of items) if (it.kind === 'file' && /^image\//.test(it.type)) fs.push(it.getAsFile());
+    if (fs.length) { e.preventDefault(); addFiles(fs); }
+  });
+  $('#strip').addEventListener('click', e => {
+    const b = e.target.closest('.th'); if (!b || locked()) return;
+    if (b.id === 'addMore') { $('#fileIn').click(); return; }
+    gotoPage(+b.dataset.i);
+  });
+  const cc = $('#cropCv');
+  const cpos = e => { const r = cc.getBoundingClientRect(); return { x: (e.clientX - r.left) * CV.w / r.width, y: (e.clientY - r.top) * CV.h / r.height }; };
+  let prevCrop = null;
+  cc.addEventListener('pointerdown', e => {
+    if (!PAGES[cur] || !CV || locked()) return;
+    const p = cpos(e), m = cropHit(p), pg = PAGES[cur];
+    prevCrop = Object.assign({}, pg.crop);
+    cdrag = { mode: m, p0: p, c0: Object.assign({}, pg.crop), neu: m === 'new' };
+    if (m === 'new') { pg.crop = { x: p.x / CV.w, y: p.y / CV.h, w: 0.001, h: 0.001 }; cdrag.mode = 'se'; cdrag.c0 = Object.assign({}, pg.crop); }
+    cc.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  cc.addEventListener('pointermove', e => {
+    if (!PAGES[cur] || !CV) return;
+    if (!cdrag) {
+      const m = cropHit(cpos(e));
+      cc.style.cursor = m === 'move' ? 'move' : m === 'new' ? 'crosshair' : (m === 'nw' || m === 'se') ? 'nwse-resize' : 'nesw-resize';
+      return;
+    }
+    const p = cpos(e);
+    if (cdrag.neu && Math.hypot(p.x - cdrag.p0.x, p.y - cdrag.p0.y) < 5) return;
+    cropMove(p); drawCrop();
+  });
+  const endCrop = e => {
+    if (!cdrag) return;
+    const p = cpos(e), pg = PAGES[cur];
+    const tiny = cdrag.neu && Math.hypot(p.x - cdrag.p0.x, p.y - cdrag.p0.y) < 5;
+    if (tiny || pg.crop.w < 0.04 || pg.crop.h < 0.04) pg.crop = prevCrop;
+    cdrag = null; drawCrop(); renderStrip(); schedule();
+  };
+  cc.addEventListener('pointerup', endCrop);
+  cc.addEventListener('pointercancel', endCrop);
+  $('#cropAll').addEventListener('click', () => { const pg = PAGES[cur]; if (!pg) return; pg.crop = { x: 0, y: 0, w: 1, h: 1 }; refreshAll(); });
+  $('#cropSq').addEventListener('click', () => {
+    const pg = PAGES[cur]; if (!pg) return;
+    const S = srcOf(pg), s = Math.min(S.width, S.height);
+    pg.crop = { x: (S.width - s) / 2 / S.width, y: (S.height - s) / 2 / S.height, w: s / S.width, h: s / S.height };
+    refreshAll();
+  });
+  $('#rotBtn').addEventListener('click', () => { const pg = PAGES[cur]; if (!pg) return; pg.rot = (pg.rot + 90) % 360; pg.crop = { x: 0, y: 0, w: 1, h: 1 }; refreshAll(); });
+  $('#delBtn').addEventListener('click', () => {
+    if (!PAGES[cur]) return;
+    const nm = PAGES[cur].name;
+    PAGES.splice(cur, 1);
+    cur = Math.min(cur, PAGES.length - 1);
+    gotoPage(Math.max(0, cur));
+    toast('「' + nm + '」을(를) 뺐습니다', 2400);
+  });
+  /* 2. 만다라 */
+  $('#segSym').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; opt.sym = +b.dataset.v; saveOpt(); resetMandalas(); refreshAll(); });
+  $('#segStyle').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; opt.mstyle = b.dataset.v; saveOpt(); resetMandalas(); refreshAll(); });
+  $('#rngRings').addEventListener('input', e => { opt.rings = +e.target.value; $('#outRings').textContent = opt.rings + '겹'; saveOpt(); resetMandalas(); clearTimeout(pvT); pvT = setTimeout(refreshAll, 60); });
+  $('#mNew').addEventListener('click', () => { if (!MP[curM]) return; MP[curM] = { seed: newSeed() }; sheetNo = curM; refreshAll(); });
+  $('#mAdd').addEventListener('click', () => { if (MP.length >= MAXP) return; MP.push({ seed: newSeed() }); curM = MP.length - 1; sheetNo = curM; refreshAll(); toast((curM + 1) + '번째 무늬를 넣었습니다', 1800); });
+  $('#mStrip').addEventListener('click', e => { const b = e.target.closest('.th'); if (!b) return; curM = +b.dataset.i; sheetNo = curM; refreshAll(); });
+  /* 3. 선 다듬기 */
+  $('#rngDetail').addEventListener('input', e => { opt.detail = +e.target.value; $('#outDetail').textContent = opt.detail; $('#tuneHint').textContent = '세밀함 ' + opt.detail; saveOpt(); schedule(160); });
+  $('#rngColors').addEventListener('input', e => { opt.colors = +e.target.value; $('#outColors').textContent = opt.colors + '색'; saveOpt(); schedule(160); });
+  $('#optInk').addEventListener('change', e => { opt.ink = e.target.checked; saveOpt(); schedule(); });
+  /* 4. 종이 */
+  const segOn = (id, key, num) => $(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    opt[key] = num ? +b.dataset.v : b.dataset.v; saveOpt();
+    if (key === 'legend') sheetNo = Math.max(0, sheets().findIndex(s => s.k === 'p' && s.i === cur));
+    paintControls(); schedule();
+  });
+  segOn('#segLw', 'lw'); segOn('#segPaper', 'paper'); segOn('#segHead', 'head'); segOn('#segLegend', 'legend');
+  $('#titleIn').addEventListener('input', e => { opt.title = e.target.value.slice(0, 40); saveOpt(); schedule(120); });
+  $('#optFrame').addEventListener('change', e => { opt.frame = e.target.checked; saveOpt(); schedule(); });
+  /* 미리보기 · 저장 */
+  $('#viewGrp').addEventListener('click', e => { const b = e.target.closest('.tb'); if (!b) return; opt.view = b.dataset.v; paintControls(); schedule(); });
+  const turn = d => {
+    const sh = sheets(); sheetNo = clamp(sheetNo + d, 0, sh.length - 1);
+    const s = sh[sheetNo];
+    if (s.k === 'm') curM = s.i; else if (s.i !== cur) { cur = s.i; renderStrip(); drawCrop(); }
+    if (s.k === 'm') renderMStrip();
+    schedule();
+  };
+  $('#pPrev').addEventListener('click', () => turn(-1));
+  $('#pNext').addEventListener('click', () => turn(1));
+  $('#dlPdf').addEventListener('click', savePdf);
+  $('#dlPng').addEventListener('click', savePng);
+  $('#doneHide').addEventListener('click', () => AD.hideDone());
+  $('#anchorX').addEventListener('click', () => { AD.closed = true; AD.sync(true); });
+  const goOut = () => { const u = externalUrl(); if (u) { location.href = u; return; } copyAddr(true); iaCopied(); };
+  $('#iaGo').addEventListener('click', goOut);
+  $('#iaGo2').addEventListener('click', goOut);
+  $('#doneGo').addEventListener('click', goOut);
+  $('#iaStay').addEventListener('click', () => {
+    lockInApp(false);
+    AD.init();
+    updateMbar();
+    toast('저장은 안 됩니다. 저장하려면 위쪽 「' + $('#iaGo').textContent + '」를 눌러 주세요.', 5200);
+  });
+  $('#iaX').addEventListener('click', () => {
+    document.body.classList.remove('inapp');
+    try { sessionStorage.setItem('coloring_page.iahide', '1'); } catch (e) { /* 무시 */ }
+  });
+  window.addEventListener('scroll', updateMbar, { passive: true });
+  let rzT = 0, lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    updateMbar();
+    if (Math.abs(window.innerWidth - lastW) < 2) return;   /* 휴대폰 주소창이 들락날락하는 세로 변화는 무시 */
+    lastW = window.innerWidth;
+    clearTimeout(rzT); rzT = setTimeout(() => { drawCrop(); renderPv(); }, 120);
+  }, { passive: true });
+  for (const id of ['#form', '#side']) {
+    $(id).addEventListener('focusin', updateMbar);
+    $(id).addEventListener('focusout', () => setTimeout(updateMbar, 0));
+  }
+  $('#mbarGo').addEventListener('click', () => $('#pvCard').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { wCache.clear(); for (const k in metCache) delete metCache[k]; });
+
+  initInApp();
+  if (!locked()) AD.init();
+  MP.push({ seed: 20261001 });
+  loadSample(opt.mode === 'pbn' ? 'house' : 'dog');
+  updateMbar();
+}
+/* 시험용 손잡이 — 화면 동작에는 쓰지 않는다 */
+window.__cp = {
+  get opt() { return opt; }, get pages() { return PAGES; }, get mp() { return MP; }, get sheetNo() { return sheetNo; },
+  sheets, specOf, resultOf, segParams, segment, mandala, makePdf, drawPage, loadSample, gotoPage, refreshAll, renderPv, addFiles, newPage,
+  setOpt(o) { Object.assign(opt, o); saveOpt(); resetMandalas(); refreshAll(); }
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+</script>
+</body>
+</html>
